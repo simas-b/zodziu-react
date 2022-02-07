@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.custom-flex-1\.8 {
+  flex: 1.8;
+}
+
+.custom-headerSize {
+  width: 256px;
+}
+@media (min-width: 640px) {
+  .custom-headerSize {
+    width: 296px;
+  }
+}
+
+.custom-questionButtonSize {
+  height: 1.75rem;
+  width: 1.75rem;
+}
+@media (min-width: 640px) {
+  .custom-questionButtonSize {
+    width: 2rem;
+    height: 2rem;
+  }
+}
