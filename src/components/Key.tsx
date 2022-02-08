@@ -6,6 +6,7 @@ type Props = {
   spacer?: boolean;
   wide?: boolean;
   children?: ReactNode;
+  onClick: (value: string | undefined) => void;
 };
 
 const style = [
@@ -26,15 +27,11 @@ const style = [
   "select-none",
 ];
 
-export default function Key({ value, spacer, wide, children }: Props) {
-  const handleClick = () => {
-    document.dispatchEvent(new CustomEvent("touchpad", { detail: value }));
-  };
-
+export default function Key({ value, spacer, wide, children, onClick }: Props) {
   return (
     <div
       className={classNames(style)}
-      onClick={handleClick}
+      onClick={() => onClick(value)}
       style={{
         flex: spacer ? "none" : wide ? 1.8 : 1,
         visibility: spacer ? "hidden" : "visible",
