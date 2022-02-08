@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import Row from "./Row";
-import RowActive from "./RowActive";
-import RowCompleted from "./RowCompleted";
 import { loadState } from "../storage";
 import { useEffect } from "react";
+import arrayPadEnd from "../utils/arrayPadEnd";
 
 type Props = {
   onGameEnd: (state: string[]) => void;
@@ -16,42 +15,38 @@ export default function Board({
   onGameEnd,
   onLettersExhausted,
 }: Props) {
-  const [rows, setRows] = useState<string[]>(loadState(targetWord));
-  const isGameOver = rows.length === 6;
-  const emptyRows = !isGameOver && [...Array(5 - rows.length)];
+  const [guesses, setRows] = useState<string[]>(loadState(targetWord));
+  const isGameOver = guesses.length === 6;
+  const rows = arrayPadEnd(guesses, 6);
+  const activeRowIndex = guesses.length;
 
-  const handleSubmit = (word: string) => {
-    if (word.length !== 5)
-      throw new Error("Can't submit word. Should be 5 letters long");
-    setRows((rows) => [...rows, word]);
+  const handleSubmit = (guess: string) => {
+    if (guess.length !== 5)
+      throw new Error("Can't submit guess. Should be 5 letters long");
+    setRows((guesses) => [...guesses, guess]);
   };
 
   // After each row submitted:
   // Save game
   // Update exhausted letters
   useEffect(() => {
-    // saveState(word, rows);
-    onLettersExhausted(getLettersExhausted(targetWord, rows));
-  }, [rows, targetWord, onLettersExhausted]);
+    // saveState(guess, guesses);
+    onLettersExhausted(getLettersExhausted(targetWord, guesses));
+  }, [guesses, targetWord, onLettersExhausted]);
 
-  if (isGameOver) onGameEnd(rows);
+  if (isGameOver) onGameEnd(guesses);
 
   return (
     <div className="grid grid-cols-5 gap-1 my-2">
-      {/* ROWS COMPLETED */}
-      {rows.map((guess, index) => (
-        <RowCompleted guess={guess} targetWord={targetWord} key={index} />
+      {rows.map((row, index) => (
+        <Row
+          onSubmit={handleSubmit}
+          targetWord={targetWord}
+          guess={guesses[index]}
+          key={index}
+          isActive={index === activeRowIndex}
+        />
       ))}
-
-      {/* ACTIVE ROW */}
-      {!isGameOver && (
-        <>
-          <RowActive handleSubmit={handleSubmit} />
-        </>
-      )}
-
-      {/* EMPTY FILLER ROWS */}
-      {emptyRows && emptyRows.map((row, index) => <Row key={index} />)}
     </div>
   );
 }
