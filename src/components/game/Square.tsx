@@ -1,8 +1,10 @@
 import React from "react";
 import classNames from "classnames";
 
+export type Color = "green" | "yellow" | "gray" | "white";
+
 type Props = {
-  color?: "green" | "yellow" | "gray" | "white";
+  color?: Color;
   size?: "small" | "normal";
   letter?: string;
 };
