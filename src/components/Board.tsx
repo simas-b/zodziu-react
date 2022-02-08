@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Row from "./Row";
 import RowActive from "./RowActive";
 import RowCompleted from "./RowCompleted";
-import { loadState, saveState } from "../storage";
+import { loadState } from "../storage";
 import { useEffect } from "react";
 
 type Props = {

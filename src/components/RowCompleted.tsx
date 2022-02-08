@@ -10,9 +10,5 @@ type Props = {
 export default function RowCompleted({ guess, targetWord }: Props) {
   const colors = compareWords(guess, targetWord);
 
-  return (
-    <>
-      <Row colors={colors} word={guess} />
-    </>
-  );
+  return <Row colors={colors} word={guess} />;
 }

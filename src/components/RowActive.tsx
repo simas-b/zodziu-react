@@ -31,7 +31,7 @@ export default function RowActive({ handleSubmit }: Props) {
     const handleTouchpad = (e: CustomEvent<string>) => {
       handleKeyPress(e.detail.toLowerCase());
     };
-
+    
     window.addEventListener("keydown", handleKeyboard);
     document.addEventListener("touchpad", handleTouchpad as EventListener);
 
@@ -41,5 +41,5 @@ export default function RowActive({ handleSubmit }: Props) {
     };
   }, [word, handleSubmit]);
 
-  return <Row word={word} />;
+  return <Row word={word} active />;
 }
