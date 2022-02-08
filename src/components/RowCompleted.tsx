@@ -1,18 +1,18 @@
 import React from "react";
-import compareWords from "./compareWords";
+import compareWords from "../utils/compareWords";
 import Row from "./Row";
 
 type Props = {
-  word: string;
   targetWord: string;
+  guess: string;
 };
 
-export default function RowCompleted({ word, targetWord }: Props) {
-  const colors = compareWords(word, targetWord);
+export default function RowCompleted({ guess, targetWord }: Props) {
+  const colors = compareWords(guess, targetWord);
 
   return (
     <>
-      <Row colors={colors} word={word} />
+      <Row colors={colors} word={guess} />
     </>
   );
 }

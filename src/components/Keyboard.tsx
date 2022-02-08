@@ -3,12 +3,16 @@ import Key from "./Key";
 import enterIcon from "../assets/enter.svg";
 import deleteIcon from "../assets/delete.svg";
 
+type Props = {
+  lettersDisabled: string[];
+};
+
 const row1 = Array.from("ąčęėįšųūž");
 const row2 = Array.from("ertyuiop");
 const row3 = Array.from("asdfghjkl");
 const row4 = Array.from("zcvbnm");
 
-export default function Keyboard() {
+export default function Keyboard({ lettersDisabled }: Props) {
   const handleClick = (value: string | undefined) => {
     document.dispatchEvent(new CustomEvent("touchpad", { detail: value }));
   };
@@ -17,7 +21,12 @@ export default function Keyboard() {
     <div className="flex w-full flex-col" style={{ maxWidth: 450 }}>
       <div className="flex shrink justify-center">
         {row1.map((letter) => (
-          <Key value={letter} key={letter} onClick={handleClick}>
+          <Key
+            value={letter}
+            key={letter}
+            onClick={handleClick}
+            disabled={lettersDisabled.includes(letter)}
+          >
             {letter}
           </Key>
         ))}
@@ -25,7 +34,12 @@ export default function Keyboard() {
       <div className="flex shrink justify-center">
         <Key spacer />
         {row2.map((letter) => (
-          <Key value={letter} key={letter} onClick={handleClick}>
+          <Key
+            value={letter}
+            key={letter}
+            onClick={handleClick}
+            disabled={lettersDisabled.includes(letter)}
+          >
             {letter}
           </Key>
         ))}
@@ -33,7 +47,12 @@ export default function Keyboard() {
       </div>
       <div className="flex shrink justify-center">
         {row3.map((letter) => (
-          <Key value={letter} key={letter} onClick={handleClick}>
+          <Key
+            value={letter}
+            key={letter}
+            onClick={handleClick}
+            disabled={lettersDisabled.includes(letter)}
+          >
             {letter}
           </Key>
         ))}
@@ -48,7 +67,12 @@ export default function Keyboard() {
           />
         </Key>
         {row4.map((letter) => (
-          <Key value={letter} key={letter} onClick={handleClick}>
+          <Key
+            value={letter}
+            key={letter}
+            onClick={handleClick}
+            disabled={lettersDisabled.includes(letter)}
+          >
             {letter}
           </Key>
         ))}
