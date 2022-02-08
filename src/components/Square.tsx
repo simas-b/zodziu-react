@@ -5,47 +5,45 @@ export type Color = "green" | "yellow" | "gray" | "white";
 
 type Props = {
   color?: Color;
-  size?: "small" | "normal";
+  small?: boolean;
   letter?: string;
   active?: boolean;
 };
 
+const colorClass = {
+  green: "bg-green text-bright border-green",
+  yellow: "bg-yellow text-bright border-yellow",
+  gray: "bg-gray text-bright border-gray",
+  white: "bg-white text-dark border-gray",
+};
+
+const style = [
+  "flex",
+  "items-center",
+  "justify-center",
+  "text-2xl",
+  "sm:text-4xl",
+  "uppercase",
+  "select-none",
+  "duration-500",
+  "border-2",
+  "shadow-md",
+];
+
 export default function Square({
   color = "white",
   letter,
-  size = "normal",
+  small = false,
   active = false,
 }: Props) {
-  const colorClass = {
-    green: "bg-green text-bright border-green",
-    yellow: "bg-yellow text-bright border-yellow",
-    gray: "bg-gray text-bright border-gray",
-    white: "bg-white text-dark border-gray",
-  };
-
-  const sizeClass = {
-    small: "h-10 w-10 sm:h-12 sm:w-12",
-    normal: "h-12 w-12 sm:h-14 sm:w-14",
-  };
-
-  const style = [
-    "flex",
-    "items-center",
-    "justify-center",
-    "text-2xl",
-    "sm:text-4xl",
-    "uppercase",
-    "select-none",
-    "duration-500",
-    "border-2",
-    "shadow-md",
-  ];
-
+  const sizeClass = small
+    ? "h-10 w-10 sm:h-12 sm:w-12"
+    : "h-12 w-12 sm:h-14 sm:w-14";
   return (
     <div
       className={classNames(
         style,
-        sizeClass[size],
+        sizeClass,
         colorClass[color],
         active ? "border-dark" : ""
       )}

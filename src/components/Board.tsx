@@ -38,7 +38,7 @@ export default function Board({
 
   return (
     <div className="grid grid-cols-5 gap-1 my-2">
-      {rows.map((row, index) => (
+      {rows.map((_, index) => (
         <Row
           onSubmit={handleSubmit}
           targetWord={targetWord}

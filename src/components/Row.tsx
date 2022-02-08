@@ -4,16 +4,16 @@ import compareWords from "../utils/compareWords";
 import Square, { Color } from "./Square";
 
 type Props = {
-  onSubmit: (activeWord: string) => void;
+  onSubmit?: (activeWord: string) => void;
   guess?: string;
   targetWord: string;
-  isActive: boolean;
+  isActive?: boolean;
 };
 export default function Row({
   onSubmit,
   guess,
   targetWord,
-  isActive,
+  isActive = false,
 }: Props) {
   const [activeWord, setActiveWord] = useState("");
 
@@ -23,11 +23,12 @@ export default function Row({
 
   const word = isActive ? activeWord : guess;
 
+  // If this row is active, add event handlers for key presses
   useEffect(() => {
     const handleKeyPress = (key: string): void => {
       if (key === "enter") {
         if (activeWord.length !== 5) return;
-        onSubmit(activeWord);
+        onSubmit && onSubmit(activeWord);
         setActiveWord("");
       }
 
