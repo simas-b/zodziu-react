@@ -6,7 +6,7 @@ type Props = {
   spacer?: boolean;
   wide?: boolean;
   children?: ReactNode;
-  onClick: (value: string | undefined) => void;
+  onClick?: (value: string | undefined) => void;
 };
 
 const style = [
@@ -31,7 +31,7 @@ export default function Key({ value, spacer, wide, children, onClick }: Props) {
   return (
     <div
       className={classNames(style)}
-      onClick={() => onClick(value)}
+      onClick={() => onClick && onClick(value)}
       style={{
         flex: spacer ? "none" : wide ? 1.8 : 1,
         visibility: spacer ? "hidden" : "visible",

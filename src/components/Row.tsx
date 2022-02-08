@@ -2,7 +2,7 @@ import React from "react";
 import Square, { Color } from "./Square";
 
 type Props = {
-  word: string;
+  word?: string;
   colors?: Color[];
 };
 
@@ -13,7 +13,7 @@ export default function Row({
   return (
     <>
       {colors.map((color, index) => (
-        <Square color={color} letter={word[index]} key={index} />
+        <Square color={color} letter={word?.[index]} key={index} />
       ))}
     </>
   );
