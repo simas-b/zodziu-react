@@ -6,21 +6,21 @@
   flex: 1.8;
 }
 
-.custom-headerSize {
+.custom-header-size {
   width: 256px;
 }
 @media (min-width: 640px) {
-  .custom-headerSize {
+  .custom-header-size {
     width: 296px;
   }
 }
 
-.custom-questionButtonSize {
+.custom-question-button-size {
   height: 1.75rem;
   width: 1.75rem;
 }
 @media (min-width: 640px) {
-  .custom-questionButtonSize {
+  .custom-question-button-size {
     width: 2rem;
     height: 2rem;
   }

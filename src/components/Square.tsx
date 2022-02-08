@@ -10,7 +10,7 @@ type Props = {
 };
 
 const colorClass = {
-  green: "text-bright bg-green borger-green",
+  green: "text-bright bg-green border-green",
   yellow: "text-bright bg-yellow border-yellow",
   gray: "text-bright bg-gray border-gray",
   white: "text-dark border-gray",
@@ -21,7 +21,7 @@ const sizeClass = {
   normal: "h-12 w-12 sm:h-14 sm:w-14",
 };
 
-const styles = [
+const style = [
   "flex",
   "items-center",
   "justify-center",
@@ -40,7 +40,7 @@ export default function Square({
   size = "normal",
 }: Props) {
   return (
-    <div className={classNames(styles, sizeClass[size], colorClass[color])}>
+    <div className={classNames(style, sizeClass[size], colorClass[color])}>
       {letter}
     </div>
   );

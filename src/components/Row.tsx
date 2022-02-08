@@ -5,6 +5,7 @@ type Props = {
   word: string;
   colors?: Color[];
 };
+
 export default function Row({
   word,
   colors = ["white", "white", "white", "white", "white"],

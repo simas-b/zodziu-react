@@ -1,10 +1,12 @@
 import React from "react";
-import Game from "./components/game/Game";
+import Board from "./components/Board";
+import Keyboard from "./components/Keyboard";
 
 function App() {
   return (
-    <div>
-      <Game />
+    <div className="flex flex-col items-center">
+      <Board />
+      <Keyboard />
     </div>
   );
 }
