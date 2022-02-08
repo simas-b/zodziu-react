@@ -1,10 +1,10 @@
 import React from "react";
-import Square from "./components/Square";
+import Game from "./components/game/Game";
 
 function App() {
   return (
     <div>
-      <Square letter="q" />
+      <Game />
     </div>
   );
 }

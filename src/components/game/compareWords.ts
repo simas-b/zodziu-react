@@ -1,15 +1,18 @@
-import type { Color } from "./Square";
+type Color = "green" | "yellow" | "gray";
 
-export type FullWordArray = [string, string, string, string, string];
-
-const compareWords: (guess: FullWordArray, target: string) => Color[] = (
+const compareWords: (guess: string, target: string) => Color[] = (
   guess,
   target
 ) => {
-  const guessArray: Array<string | null> = guess;
-  const targetArray: Array<string | null> = Array.from(target);
+  if (guess.length !== 5)
+    throw new Error("Guessed word should be 5 letters for comparing.");
+  if (target.length !== 5)
+    throw new Error("Target word should be 5 letters for comparing.");
 
-  const result: Array<Color> = [];
+  const guessArray: (string | null)[] = Array.from(guess);
+  const targetArray: (string | null)[] = Array.from(target);
+
+  const result: Color[] = [];
 
   // First deal with letters we guessed right
   guessArray.forEach((letter, column) => {
