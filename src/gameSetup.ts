@@ -1,10 +1,12 @@
 import wordlist from "./wordlist";
 
 const getTodaysGameNumber = () => {
-  const gameStart = new Date(2022, 1, 7, 0, 0, 0, 0);
+  const gameStart = new Date(2022, 1, 9, 0, 0, 0, 0);
   const distance = new Date().getTime() - gameStart.getTime();
 
-  return Math.floor(distance / (1000 * 60 * 60 * 24));
+  const daysPassed = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+  return daysPassed % wordlist.length;
 };
 
 export const gameNumber = getTodaysGameNumber();

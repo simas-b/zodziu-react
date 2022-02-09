@@ -10,24 +10,30 @@ type Time = {
   s: string;
 };
 
+let nextMidnightDate = new Date();
+nextMidnightDate.setDate(nextMidnightDate.getDate() + 1);
+nextMidnightDate.setHours(0, 0, 0, 0);
+
+// uncomment for debugging
+nextMidnightDate = new Date();
+nextMidnightDate.setSeconds(nextMidnightDate.getSeconds() + 10);
 
 export default function Countdown({ onTimeUp }: Props) {
   const [time, setTime] = useState<Time | undefined>();
 
-  let nextMidnightDate = new Date();
-  nextMidnightDate.setDate(nextMidnightDate.getDate() + 1);
-  nextMidnightDate.setHours(0, 0, 0, 0);
-  
-  // uncomment for debugging
-  nextMidnightDate = new Date();
-  nextMidnightDate.setSeconds(nextMidnightDate.getSeconds() + 10);
-
   useEffect(() => {
-    tick();
     const intervalID = setInterval(tick, 1000);
+    tick();
 
     function tick() {
       const distance = nextMidnightDate.getTime() - new Date().getTime();
+
+      if (distance < 0) {
+        clearInterval(intervalID);
+        onTimeUp();
+        return;
+      }
+
       const h = Math.floor(distance / (1000 * 60 * 60))
         .toString()
         .padStart(2, "0");
@@ -37,12 +43,6 @@ export default function Countdown({ onTimeUp }: Props) {
       const s = Math.floor((distance % (1000 * 60)) / 1000)
         .toString()
         .padStart(2, "0");
-
-      if (distance < 0) {
-        clearInterval(intervalID);
-        onTimeUp();
-        return;
-      }
 
       setTime({ h, m, s });
     }

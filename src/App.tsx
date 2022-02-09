@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Board from "./components/Board";
 import Card from "./components/Card";
 import Header from "./components/Header";
@@ -12,12 +12,16 @@ function App() {
   const [lettersExhausted, setLettersExhausted] = useState<string[]>([]);
   const [endGameState, setEndGameState] = useState<string[] | undefined>();
   const [isRulesOpen, setIsRulesOpen] = useState(false);
-  const [isResultsOpen, setIsResultsOpen] = useState(true);
+  const [isResultsOpen, setIsResultsOpen] = useState(false);
   const isGameOver = !!endGameState;
 
   const handleBoardClick = () => {
     if (isGameOver) setIsResultsOpen(true);
   };
+
+  useEffect(() => {
+    if (endGameState) setIsResultsOpen(true);
+  }, [endGameState]);
 
   return (
     <Layout>
@@ -32,15 +36,13 @@ function App() {
       <Card isOpen={isRulesOpen} onClose={() => setIsRulesOpen(false)}>
         <Rules />
       </Card>
-      {isGameOver && (
-        <Card isOpen={isResultsOpen} onClose={() => setIsResultsOpen(false)}>
-          <Results
-            endGameState={endGameState}
-            targetWord={targetWord}
-            gameNumber={gameNumber}
-          />
-        </Card>
-      )}
+      <Card isOpen={isResultsOpen} onClose={() => setIsResultsOpen(false)}>
+        <Results
+          endGameState={endGameState || []}
+          targetWord={targetWord}
+          gameNumber={gameNumber}
+        />
+      </Card>
     </Layout>
   );
 }

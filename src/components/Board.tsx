@@ -36,7 +36,6 @@ export default function Board({
   useEffect(() => {
     // Hide exhausted letters
     onLettersExhausted(getLettersExhausted(targetWord, guesses));
-
     // End game
     if (guesses.length === 6 || guesses[guesses.length - 1] === targetWord)
       onGameEnd(guesses);

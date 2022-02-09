@@ -1,6 +1,4 @@
 const wordlist = [
-  "gėjus",
-  "šnipė",
   "gyvis",
   "tvoja",
   "ėjikė",
