@@ -28,7 +28,7 @@ const styles = {
     "items-center",
     "m-4",
     "py-4",
-    "border-gray-200",
+    "border-silver",
     "border-2",
     "rounded-md",
     "shadow-md",
