@@ -4,18 +4,18 @@ import arrowIcon from "../assets/arrow.svg";
 import Countdown from "./Countdown";
 import SocialStatus from "./SocialStatus";
 import Row from "./Row";
+import { loadState } from "../storage";
 
 type Props = {
-  endGameState: string[];
   targetWord: string;
   gameNumber: number;
 };
 
 export default function Results({
-  endGameState,
   targetWord,
   gameNumber,
 }: Props) {
+  const endGameState = loadState(targetWord);
   const isWinner = endGameState[endGameState.length - 1] === targetWord;
   const [isResultCopied, setIsResultCopied] = useState<boolean>(false);
 
