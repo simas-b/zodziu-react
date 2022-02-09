@@ -4,14 +4,21 @@ import { gameNumber } from "../gameSetup";
 import arrowIcon from "../assets/arrow.svg";
 import Countdown from "./Countdown";
 import SocialStatus from "./SocialStatus";
+import Row from "./Row";
 
 type Props = {
   endGameState: string[];
   targetWord: string;
-  onClose: ()=>void;
+  gameNumber: number;
+  onClose: () => void;
 };
 
-export default function Results({ endGameState, targetWord, onClose }: Props) {
+export default function Results({
+  endGameState,
+  targetWord,
+  gameNumber,
+  onClose,
+}: Props) {
   const isWinner = endGameState[5] === targetWord;
   const [isIconsCopied, setIconsCopied] = useState<boolean>(false);
 
@@ -30,11 +37,18 @@ export default function Results({ endGameState, targetWord, onClose }: Props) {
         id="info-card-title"
         className="py-8 text-xl font-semibold tracking-widest"
       >
-        <Logo /> №{gameNumber}
+        <Logo />{" "}
         <span className="tracking-normal font-normal">
-          {isWinner ? "pavarei!" : "nepaėjo."}
+          №{gameNumber} {isWinner ? "pavarei!" : "nepaėjo."}
         </span>
       </h2>
+
+      {/* ANSWER */}
+      <div className="grid grid-cols-5 gap-1">
+        <Row guess={targetWord} targetWord={targetWord} small />
+      </div>
+
+      {/* SOCIAL */}
 
       <div className="flex my-14 py-6 w-3/4 justify-center items-center border-yellow border-y-2">
         <div className="flex-1 flex justify-center items-center">
@@ -42,6 +56,7 @@ export default function Results({ endGameState, targetWord, onClose }: Props) {
             onCopied={handleIconsCopied}
             targetWord={targetWord}
             endGameState={endGameState}
+            gameNumber={gameNumber}
           />
         </div>
 
@@ -59,6 +74,8 @@ export default function Results({ endGameState, targetWord, onClose }: Props) {
           />
         </div>
       </div>
+
+      {/* COUNTDOWN */}
 
       <div className="flex flex-col items-center mt-2 mb-8 select-none">
         <p className="uppercase text-sm tracking-wider">Kitas žodis už</p>

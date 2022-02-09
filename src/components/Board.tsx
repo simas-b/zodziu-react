@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Row from "./Row";
-import { loadState } from "../storage";
+import { loadState, saveState } from "../storage";
 import { useEffect } from "react";
 import arrayPadEnd from "../utils/arrayPadEnd";
 
@@ -26,7 +26,7 @@ export default function Board({
   };
 
   useEffect(() => {
-    // saveState(guess, guesses);
+    saveState(targetWord, guesses);
 
     onLettersExhausted(getLettersExhausted(targetWord, guesses));
 

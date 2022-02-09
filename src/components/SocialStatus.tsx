@@ -5,6 +5,7 @@ import generateSocialIcons from "../utils/generateSocialIcons";
 type Props = {
   endGameState: string[];
   targetWord: string;
+  gameNumber: number;
   onCopied: () => void;
 };
 
@@ -25,18 +26,27 @@ export default function SocialStatus({
   endGameState,
   targetWord,
   onCopied,
+  gameNumber,
 }: Props) {
   const icons = generateSocialIcons(endGameState, targetWord);
-  console.log(icons);
+
+  const socialText = `ŽÓDŽIU №${gameNumber}\n\n` + icons;
+
   const handleClick = () => {
-    console.log("Copied");
+    navigator.share({ text: socialText }).catch(() => {
+      console.log(
+        "navigator.share functionality unavailable. Trying to copy to clipboard"
+      );
+      navigator.clipboard.writeText(socialText);
+    });
+
     onCopied();
   };
 
   return (
     <div className={classNames(styles.container)} onClick={handleClick}>
-      {icons.map((icons) => (
-        <div>{icons}</div>
+      {icons.map((icons, index) => (
+        <div key={index}>{icons}</div>
       ))}
     </div>
   );

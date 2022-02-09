@@ -5,7 +5,7 @@ import Keyboard from "./components/Keyboard";
 import Layout from "./components/Layout";
 import Results from "./components/Results";
 import Rules from "./components/Rules";
-import { targetWord } from "./gameSetup";
+import { targetWord, gameNumber } from "./gameSetup";
 
 function App() {
   const [lettersExhausted, setLettersExhausted] = useState<string[]>([]);
@@ -33,6 +33,7 @@ function App() {
           <Results
             endGameState={endGameState}
             targetWord={targetWord}
+            gameNumber={gameNumber}
             onClose={() => setIsResultsOpen(false)}
           />
         </Card>

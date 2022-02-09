@@ -21,8 +21,6 @@ const style = [
   "flex",
   "items-center",
   "justify-center",
-  "text-2xl",
-  "sm:text-4xl",
   "uppercase",
   "select-none",
   "duration-500",
@@ -37,8 +35,8 @@ export default function Square({
   active = false,
 }: Props) {
   const sizeClass = small
-    ? "h-10 w-10 sm:h-12 sm:w-12"
-    : "h-12 w-12 sm:h-14 sm:w-14";
+    ? "h-8 w-8 sm:h-10 sm:w-10 text-xl sm:text-2xl"
+    : "h-12 w-12 sm:h-14 sm:w-14 text-2xl sm:text-4xl";
   return (
     <div
       className={classNames(

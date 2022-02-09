@@ -18,7 +18,9 @@ export default function Countdown({ onTimeUp }: Props) {
   const [time, setTime] = useState<Time | undefined>();
 
   useEffect(() => {
+    tick();
     const intervalID = setInterval(tick, 1000);
+
     function tick() {
       const distance = nextMidnightDate.getTime() - new Date().getTime();
       const h = Math.floor(distance / (1000 * 60 * 60))

@@ -8,12 +8,14 @@ type Props = {
   guess?: string;
   targetWord: string;
   isActive?: boolean;
+  small?: boolean;
 };
 export default function Row({
   onSubmit,
   guess,
   targetWord,
   isActive = false,
+  small = false,
 }: Props) {
   const [activeWord, setActiveWord] = useState<string>("");
 
@@ -69,6 +71,7 @@ export default function Row({
           letter={word?.[index]}
           key={index}
           active={isActive && !!activeWord[index]}
+          small={small}
         />
       ))}
     </>
