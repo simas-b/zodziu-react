@@ -16,7 +16,7 @@ export default function Board({
   onLettersExhausted,
 }: Props) {
   const [guesses, setRows] = useState<string[]>(loadState(targetWord));
-  const rows = arrayPadEnd(guesses, 6);
+  const rows = arrayPadEnd(guesses, undefined, 6);
   const activeRowIndex = guesses.length;
 
   const handleSubmit = (guess: string) => {

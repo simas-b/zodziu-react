@@ -1,10 +1,10 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import Board from "./components/Board";
 import Card from "./components/Card";
 import Keyboard from "./components/Keyboard";
 import Layout from "./components/Layout";
 import Rules from "./components/Rules";
-import targetWord from "./targetWord";
+import { targetWord } from "./gameSetup";
 
 function App() {
   const [lettersExhausted, setLettersExhausted] = useState<string[]>([]);

@@ -7,4 +7,5 @@ const getTodaysGameNumber = () => {
   return Math.floor(distance / (1000 * 60 * 60 * 24));
 };
 
-export default wordlist[getTodaysGameNumber()];
+export const gameNumber = getTodaysGameNumber();
+export const targetWord = wordlist[gameNumber];
