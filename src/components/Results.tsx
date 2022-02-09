@@ -4,6 +4,7 @@ import arrowIcon from "../assets/arrow.svg";
 import Countdown from "./Countdown";
 import SocialStatus from "./SocialStatus";
 import Row from "./Row";
+import crossIcon from "../assets/cross.svg";
 
 type Props = {
   endGameState: string[];
@@ -21,41 +22,47 @@ export default function Results({
   const isWinner = endGameState[5] === targetWord;
   const [isResultCopied, setIsResultCopied] = useState<boolean>(false);
 
-  //   const shareFunctionAvailable = typeof navigator.share === "function";
+  const shareFunctionAvailable = typeof navigator.share === "function";
 
+  // Reload on time up
   const handleTimeUp = () => {
-    console.log("time is up");
+    window.location.reload();
   };
 
   const handleResultClick = (socialText: string) => {
-    // if (shareFunctionAvailable) {
-    //   navigator
-    //     .share({ text: socialText })
-    //     .then(() => {
-    //       setIsResultCopied(true);
-    //     })
-    //     .catch((error) => {
-    //       console.error("Error: could not share game results", error.message);
-    //     });
-    // }
-    // return;
+    if (shareFunctionAvailable) {
+      navigator.share({ text: socialText }).catch((error) => {
+        console.error("Error: could not share game results", error.message);
+      });
+      return;
+    }
 
     // Simple navigator clipboard as fallback
     navigator.clipboard.writeText(socialText);
     setIsResultCopied(true);
+    setTimeout(() => setIsResultCopied(false), 10000);
   };
 
   return (
     <>
-      <h2
-        id="info-card-title"
-        className="py-8 text-xl font-semibold tracking-widest"
-      >
-        <Logo />{" "}
-        <span className="tracking-normal font-normal">
-          №{gameNumber} {isWinner ? "pavarei!" : "nepaėjo."}
-        </span>
-      </h2>
+      <div className="py-8 flex justify-between">
+        <h2
+          id="info-card-title"
+          className="text-xl font-semibold tracking-widest"
+        >
+          <Logo />{" "}
+          <span className="tracking-normal font-normal">
+            №{gameNumber} {isWinner ? "pavarei!" : "nepaėjo."}
+          </span>
+        </h2>
+        <div className="cursor-pointer select-none" onClick={onClose}>
+          <img
+            src={crossIcon}
+            alt="close"
+            style={{ width: "2rem", height: "2rem" }}
+          />
+        </div>
+      </div>
 
       {/* ANSWER */}
       <div className="grid grid-cols-5 gap-1">

@@ -18,6 +18,7 @@ export default function Board({
   const [guesses, setRows] = useState<string[]>(loadState(targetWord));
   const rows = arrayPadEnd(guesses, undefined, 6);
   const activeRowIndex = guesses.length;
+  const isGameOver = guesses[guesses.length - 1] === targetWord;
 
   const handleSubmit = (guess: string) => {
     if (guess.length !== 5)
@@ -25,12 +26,16 @@ export default function Board({
     setRows((guesses) => [...guesses, guess]);
   };
 
+  // After each submit
   useEffect(() => {
     saveState(targetWord, guesses);
 
+    // Hide exhausted letters
     onLettersExhausted(getLettersExhausted(targetWord, guesses));
 
-    if (guesses.length === 6) onGameEnd(guesses);
+    // End game
+    if (guesses.length === 6 || guesses[guesses.length - 1] === targetWord)
+      onGameEnd(guesses);
   }, [guesses, targetWord, onLettersExhausted, onGameEnd]);
 
   return (
@@ -41,7 +46,7 @@ export default function Board({
           targetWord={targetWord}
           guess={guesses[index]}
           key={index}
-          isActive={index === activeRowIndex}
+          isActive={!isGameOver && index === activeRowIndex}
         />
       ))}
     </div>

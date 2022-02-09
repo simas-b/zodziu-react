@@ -17,7 +17,7 @@ const styles = {
     "cursor-pointer",
     "leading-5",
     "border",
-    "border-gray-400",
+    "border-gray",
     "rounded-md",
   ],
 };
@@ -30,7 +30,7 @@ export default function SocialStatus({
 }: Props) {
   const icons = generateSocialIcons(endGameState, targetWord);
 
-  const socialText = `ŽÓDŽIU №${gameNumber}\n\n` + icons;
+  const socialText = `ŽÓDŽIU №${gameNumber}\n\n` + icons.join("\n");
 
   return (
     <div

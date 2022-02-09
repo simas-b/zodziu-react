@@ -17,7 +17,7 @@ test("all yellow colors", () => {
 });
 
 test("all gray colors", () => {
-  const state = ["prūžą", "žūęįc", "prūžą", "žūęįc", "prūžą"];
+  const state = ["prūžą", "žūęįc", "prūžą", "žūęįc", "prūžą", "prūžą"];
   const result = generateSocialIcons(state, "bsala");
 
   const expected = [
@@ -60,6 +60,15 @@ test("mixed colors", () => {
     "⬜⬜⬜⬜⬜",
     "⬜🟩🟩⬜⬜",
   ];
+
+  expect(result).toEqual(expected);
+});
+
+test("only 3 rows", () => {
+  const state = ["labas", "malka", "žadėk", "namas"];
+  const result = generateSocialIcons(state, "namas");
+
+  const expected = ["⬜🟩⬜🟩🟩", "🟨🟩⬜⬜🟨", "⬜🟩⬜⬜⬜", "🟩🟩🟩🟩🟩"];
 
   expect(result).toEqual(expected);
 });
