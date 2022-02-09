@@ -48,13 +48,11 @@ function App() {
       </Card>
 
       <Card isOpen={isResultsOpen} onClose={() => setIsResultsOpen(false)}>
-        {endGameState && isResultsOpen && (
           <Results
-            endGameState={endGameState}
+            endGameState={endGameState || []}
             targetWord={targetWord}
             gameNumber={gameNumber}
           />
-        )}
       </Card>
     </Layout>
   );
