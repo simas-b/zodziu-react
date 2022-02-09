@@ -8,12 +8,14 @@ type Props = {
   onGameEnd: (state: string[]) => void;
   onLettersExhausted: React.Dispatch<React.SetStateAction<string[]>>;
   targetWord: string;
+  onClick: () => void;
 };
 
 export default function Board({
   targetWord,
   onGameEnd,
   onLettersExhausted,
+  onClick,
 }: Props) {
   const [guesses, setRows] = useState<string[]>(loadState(targetWord));
   const rows = arrayPadEnd(guesses, undefined, 6);
@@ -36,11 +38,10 @@ export default function Board({
     // End game
     if (guesses.length === 6 || guesses[guesses.length - 1] === targetWord)
       onGameEnd(guesses);
-
   }, [guesses, targetWord, onLettersExhausted, onGameEnd]);
 
   return (
-    <div className="grid grid-cols-5 gap-1 my-2">
+    <div className="grid grid-cols-5 gap-1 my-2" onClick={onClick}>
       {rows.map((_, index) => (
         <Row
           onSubmit={handleSubmit}

@@ -25,6 +25,7 @@ function App() {
     <Layout>
       <Header onClick={() => setIsRulesOpen(true)} />
       <Board
+        targetWord={targetWord}
         onGameEnd={setEndGameState}
         onLettersExhausted={setLettersExhausted}
         onClick={handleBoardClick}
