@@ -16,8 +16,6 @@ function App() {
 
   const isGameOver = !!endGameState;
 
-  if (endGameState) console.log("sveikinu", endGameState);
-
   return (
     <Layout>
       <Header onClick={() => setIsRulesOpen(true)} />

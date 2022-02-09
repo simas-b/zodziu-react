@@ -26,7 +26,6 @@ const style = [
   "shadow",
   "uppercase",
   "select-none",
-  "duration-500",
 ];
 
 export default function Key({

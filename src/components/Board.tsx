@@ -36,6 +36,7 @@ export default function Board({
     // End game
     if (guesses.length === 6 || guesses[guesses.length - 1] === targetWord)
       onGameEnd(guesses);
+
   }, [guesses, targetWord, onLettersExhausted, onGameEnd]);
 
   return (

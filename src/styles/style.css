@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+div {
+  -webkit-tap-highlight-color: transparent;
+}
+
 .custom-flex-1\.8 {
   flex: 1.8;
 }
