@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Logo from "./Logo";
-import { gameNumber } from "../gameSetup";
 import arrowIcon from "../assets/arrow.svg";
 import Countdown from "./Countdown";
 import SocialStatus from "./SocialStatus";
