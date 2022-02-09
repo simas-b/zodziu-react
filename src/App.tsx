@@ -23,12 +23,6 @@ function App() {
     if (endGameState) setIsResultsOpen(true);
   }, [endGameState]);
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setCssLoaded(true);
-  //   }, 10);
-  // }, []);
-
   return (
     <Layout>
       <Header onClick={() => setIsRulesOpen(true)} />

@@ -53,16 +53,18 @@ export default function Card({ isOpen = false, children, onClose }: Props) {
   return (
     <>
       <div
-        className={classNames(
-          styles.container,
-          isOpen ? "opacity-1" : "opacity-0 -translate-y-64"
-        )}
+        className={classNames(styles.container)}
         style={{
           visibility: isOpen ? "visible" : "hidden",
-          transition: "all 0.5s ease",
         }}
       >
-        <div className={classNames(styles.card)} style={{ maxWidth: 450 }}>
+        <div
+          className={classNames(
+            styles.card,
+            isOpen ? "opacity-1" : "opacity-0 -translate-y-64"
+          )}
+          style={{ maxWidth: 450, transition: "all 0.5s ease" }}
+        >
           <div className="px-8 pt-4 flex justify-end w-full">
             <div className="cursor-pointer select-none" onClick={onClose}>
               <img
