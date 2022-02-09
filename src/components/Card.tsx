@@ -20,6 +20,7 @@ const styles = {
     "h-screen",
     "top-0",
     "left-0",
+    "invisible",
   ],
 
   card: [
@@ -55,7 +56,10 @@ const styles = {
 export default function Card({ isOpen = false, children, onClose }: Props) {
   return (
     <>
-      <div className={classNames(styles.container, !isOpen && "invisible")}>
+      <div
+        className={classNames(styles.container)}
+        style={{ visibility: isOpen ? "visible" : "hidden" }}
+      >
         <div
           className={classNames(
             styles.card,
@@ -79,7 +83,7 @@ export default function Card({ isOpen = false, children, onClose }: Props) {
       <div
         className={classNames(
           styles.overlay,
-          isOpen ? "opacity-80 visible" : "invisible opacity-0"
+          isOpen ? "opacity-80" : "invisible opacity-0"
         )}
       ></div>
     </>

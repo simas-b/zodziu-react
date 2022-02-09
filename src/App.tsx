@@ -34,23 +34,19 @@ function App() {
       />
       <Keyboard lettersDisabled={lettersExhausted} />
 
-      <div className={!isRulesOpen ? "invisible" : ""}>
-        <Card isOpen={isRulesOpen} onClose={() => setIsRulesOpen(false)}>
-          <Rules />
-        </Card>
-      </div>
+      <Card isOpen={isRulesOpen} onClose={() => setIsRulesOpen(false)}>
+        <Rules />
+      </Card>
 
-      <div className={!isResultsOpen ? "invisible" : ""}>
-        <Card isOpen={isResultsOpen} onClose={() => setIsResultsOpen(false)}>
-          {endGameState && (
-            <Results
-              endGameState={endGameState}
-              targetWord={targetWord}
-              gameNumber={gameNumber}
-            />
-          )}
-        </Card>
-      </div>
+      <Card isOpen={isResultsOpen} onClose={() => setIsResultsOpen(false)}>
+        {endGameState && (
+          <Results
+            endGameState={endGameState}
+            targetWord={targetWord}
+            gameNumber={gameNumber}
+          />
+        )}
+      </Card>
     </Layout>
   );
 }
