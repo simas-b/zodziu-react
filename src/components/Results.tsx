@@ -19,15 +19,16 @@ export default function Results({
   const isWinner = endGameState[endGameState.length - 1] === targetWord;
   const [isResultCopied, setIsResultCopied] = useState<boolean>(false);
 
-  const shareFunctionAvailable = typeof navigator.share === "function";
-
   // Reload on time up
   const handleTimeUp = () => {
     window.location.reload();
   };
 
   const handleResultClick = (socialText: string) => {
-    if (shareFunctionAvailable) {
+    if (
+      typeof navigator.share === "function" &&
+      navigator.canShare({ text: socialText })
+    ) {
       navigator.share({ text: socialText }).catch((error) => {
         console.error("Error: could not share game results", error.message);
       });
