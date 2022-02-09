@@ -19,8 +19,6 @@ function App() {
     if (isGameOver) setIsResultsOpen(true);
   };
 
-  console.log(targetWord);
-
   return (
     <Layout>
       <Header onClick={() => setIsRulesOpen(true)} />

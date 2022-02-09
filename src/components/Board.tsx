@@ -25,13 +25,15 @@ export default function Board({
   const handleSubmit = (guess: string) => {
     if (guess.length !== 5)
       throw new Error("Can't submit guess. Should be 5 letters long");
-    setRows((guesses) => [...guesses, guess]);
+    setRows((guesses) => {
+      const newGuesses = [...guesses, guess];
+      saveState(targetWord, newGuesses);
+      return newGuesses;
+    });
   };
 
   // After each submit
   useEffect(() => {
-    saveState(targetWord, guesses);
-
     // Hide exhausted letters
     onLettersExhausted(getLettersExhausted(targetWord, guesses));
 

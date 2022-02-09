@@ -10,16 +10,17 @@ type Time = {
   s: string;
 };
 
-let nextMidnightDate = new Date();
-nextMidnightDate.setDate(nextMidnightDate.getDate() + 1);
-nextMidnightDate.setHours(0, 0, 0, 0);
-
-// uncomment for debugging
-nextMidnightDate = new Date();
-nextMidnightDate.setSeconds(nextMidnightDate.getSeconds() + 10);
 
 export default function Countdown({ onTimeUp }: Props) {
   const [time, setTime] = useState<Time | undefined>();
+
+  let nextMidnightDate = new Date();
+  nextMidnightDate.setDate(nextMidnightDate.getDate() + 1);
+  nextMidnightDate.setHours(0, 0, 0, 0);
+  
+  // uncomment for debugging
+  nextMidnightDate = new Date();
+  nextMidnightDate.setSeconds(nextMidnightDate.getSeconds() + 10);
 
   useEffect(() => {
     tick();

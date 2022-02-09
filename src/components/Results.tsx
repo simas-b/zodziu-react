@@ -16,7 +16,7 @@ export default function Results({
   targetWord,
   gameNumber,
 }: Props) {
-  const isWinner = endGameState[5] === targetWord;
+  const isWinner = endGameState[endGameState.length - 1] === targetWord;
   const [isResultCopied, setIsResultCopied] = useState<boolean>(false);
 
   const shareFunctionAvailable = typeof navigator.share === "function";
