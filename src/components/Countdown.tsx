@@ -42,7 +42,7 @@ export default function Countdown({ onTimeUp }: Props) {
     return () => {
       clearInterval(intervalID);
     };
-  }, []);
+  }, [onTimeUp]);
 
   return (
     <div className="flex py-2 font-bold">
