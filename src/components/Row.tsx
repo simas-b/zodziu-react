@@ -15,7 +15,7 @@ export default function Row({
   targetWord,
   isActive = false,
 }: Props) {
-  const [activeWord, setActiveWord] = useState("");
+  const [activeWord, setActiveWord] = useState<string>("");
 
   const colors: Color[] = guess
     ? compareWords(guess, targetWord)
@@ -32,15 +32,15 @@ export default function Row({
         setActiveWord("");
       }
 
-      if (key === "delete" || key === "backspace") {
-        if (activeWord.length > 0)
-          setActiveWord((activeWord) => activeWord.slice(0, -1));
-      }
+      if (key === "delete" || key === "backspace")
+        setActiveWord((activeWord) =>
+          activeWord.length > 0 ? activeWord.slice(0, -1) : ""
+        );
 
-      if (config.lettersAllowed.includes(key)) {
-        if (activeWord.length < 5)
-          setActiveWord((activeWord) => (activeWord += key));
-      }
+      if (config.lettersAllowed.includes(key))
+        setActiveWord((activeWord) =>
+          activeWord.length < 5 ? (activeWord += key) : activeWord
+        );
     };
 
     const handleKeyboard = (e: KeyboardEvent) => {

@@ -16,7 +16,6 @@ export default function Board({
   onLettersExhausted,
 }: Props) {
   const [guesses, setRows] = useState<string[]>(loadState(targetWord));
-  const isGameOver = guesses.length === 6;
   const rows = arrayPadEnd(guesses, 6);
   const activeRowIndex = guesses.length;
 
@@ -26,15 +25,13 @@ export default function Board({
     setRows((guesses) => [...guesses, guess]);
   };
 
-  // After each row submitted:
-  // Save game
-  // Update exhausted letters
   useEffect(() => {
     // saveState(guess, guesses);
-    onLettersExhausted(getLettersExhausted(targetWord, guesses));
-  }, [guesses, targetWord, onLettersExhausted]);
 
-  if (isGameOver) onGameEnd(guesses);
+    onLettersExhausted(getLettersExhausted(targetWord, guesses));
+
+    if (guesses.length === 6) onGameEnd(guesses);
+  }, [guesses, targetWord, onLettersExhausted, onGameEnd]);
 
   return (
     <div className="grid grid-cols-5 gap-1 my-2">
