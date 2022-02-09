@@ -13,16 +13,21 @@ function App() {
   const [endGameState, setEndGameState] = useState<string[] | undefined>();
   const [isRulesOpen, setIsRulesOpen] = useState(false);
   const [isResultsOpen, setIsResultsOpen] = useState(true);
-
   const isGameOver = !!endGameState;
+
+  const handleBoardClick = () => {
+    if (isGameOver) setIsResultsOpen(true);
+  };
+
+  console.log(targetWord);
 
   return (
     <Layout>
       <Header onClick={() => setIsRulesOpen(true)} />
       <Board
-        targetWord={targetWord}
         onGameEnd={setEndGameState}
         onLettersExhausted={setLettersExhausted}
+        onClick={handleBoardClick}
       />
       <Keyboard lettersDisabled={lettersExhausted} />
       <Card isOpen={isRulesOpen} onClose={() => setIsRulesOpen(false)}>
