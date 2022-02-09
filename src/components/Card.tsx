@@ -39,8 +39,6 @@ const styles = {
   ],
 
   overlay: [
-    "transition-all",
-    "duration-500",
     "w-screen",
     "h-screen",
     "z-10",
