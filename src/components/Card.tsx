@@ -11,6 +11,7 @@ type Props = {
 const styles = {
   container: [
     "transition-all",
+    "duration-500",
     "select-none",
     "absolute",
     "flex",
@@ -20,11 +21,10 @@ const styles = {
     "h-screen",
     "top-0",
     "left-0",
-    "invisible",
+    "z-20",
   ],
 
   card: [
-    "duration-300",
     "flex",
     "flex-1",
     "flex-col",
@@ -37,12 +37,12 @@ const styles = {
     "rounded-md",
     "shadow-md",
     "bg-white",
-    "z-20",
+    "z-30",
   ],
 
   overlay: [
     "transition-all",
-    "duration-300",
+    "duration-500",
     "w-screen",
     "h-screen",
     "z-10",
@@ -57,16 +57,12 @@ export default function Card({ isOpen = false, children, onClose }: Props) {
   return (
     <>
       <div
-        className={classNames(styles.container)}
-        style={{ visibility: isOpen ? "visible" : "hidden" }}
+        className={classNames(
+          styles.container,
+          isOpen ? "visible opacity-1" : "invisible opacity-0 -translate-y-64"
+        )}
       >
-        <div
-          className={classNames(
-            styles.card,
-            isOpen ? "opacity-1 " : "opacity-0 -translate-y-64"
-          )}
-          style={{ maxWidth: 450 }}
-        >
+        <div className={classNames(styles.card)} style={{ maxWidth: 450 }}>
           <div className="px-8 pt-4 flex justify-end w-full">
             <div className="cursor-pointer select-none" onClick={onClose}>
               <img
@@ -76,14 +72,14 @@ export default function Card({ isOpen = false, children, onClose }: Props) {
               />
             </div>
           </div>
-          {isOpen && children}
+          {children}
         </div>
       </div>
 
       <div
         className={classNames(
           styles.overlay,
-          isOpen ? "opacity-80" : "invisible opacity-0"
+          isOpen ? "visible opacity-80" : "invisible opacity-0"
         )}
       ></div>
     </>

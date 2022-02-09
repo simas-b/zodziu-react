@@ -14,7 +14,7 @@ function App() {
   const [isRulesOpen, setIsRulesOpen] = useState(false);
   const [isResultsOpen, setIsResultsOpen] = useState(false);
   const isGameOver = !!endGameState;
-  const [cssLoaded, setCssLoaded] = useState(false);
+  // const [cssLoaded, setCssLoaded] = useState(false);
 
   const handleBoardClick = () => {
     if (isGameOver) setIsResultsOpen(true);
@@ -24,13 +24,13 @@ function App() {
     if (endGameState) setIsResultsOpen(true);
   }, [endGameState]);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setCssLoaded(true);
-    }, 10);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setCssLoaded(true);
+  //   }, 10);
+  // }, []);
 
-  if (!cssLoaded) return null;
+  // if (!cssLoaded) return null;
 
   return (
     <Layout>
