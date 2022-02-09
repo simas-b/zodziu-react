@@ -37,7 +37,7 @@ function App() {
         <Rules />
       </Card>
       <Card isOpen={isResultsOpen} onClose={() => setIsResultsOpen(false)}>
-        {endGameState && (
+        {endGameState && isResultsOpen && (
           <Results
             endGameState={endGameState}
             targetWord={targetWord}
