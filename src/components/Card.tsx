@@ -70,7 +70,7 @@ export default function Card({ isOpen = false, children, onClose }: Props) {
               />
             </div>
           </div>
-          {children}
+          {isOpen && children}
         </div>
       </div>
 
