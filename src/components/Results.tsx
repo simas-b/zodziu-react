@@ -4,20 +4,17 @@ import arrowIcon from "../assets/arrow.svg";
 import Countdown from "./Countdown";
 import SocialStatus from "./SocialStatus";
 import Row from "./Row";
-import crossIcon from "../assets/cross.svg";
 
 type Props = {
   endGameState: string[];
   targetWord: string;
   gameNumber: number;
-  onClose: () => void;
 };
 
 export default function Results({
   endGameState,
   targetWord,
   gameNumber,
-  onClose,
 }: Props) {
   const isWinner = endGameState[5] === targetWord;
   const [isResultCopied, setIsResultCopied] = useState<boolean>(false);
@@ -45,33 +42,21 @@ export default function Results({
 
   return (
     <>
-      <div className="py-8 flex justify-between">
-        <h2
-          id="info-card-title"
-          className="text-xl font-semibold tracking-widest"
-        >
-          <Logo />{" "}
-          <span className="tracking-normal font-normal">
-            №{gameNumber} {isWinner ? "pavarei!" : "nepaėjo."}
-          </span>
-        </h2>
-        <div className="cursor-pointer select-none" onClick={onClose}>
-          <img
-            src={crossIcon}
-            alt="close"
-            style={{ width: "2rem", height: "2rem" }}
-          />
-        </div>
-      </div>
+      <h2 className="text-xl font-semibold tracking-widest my-4">
+        <Logo />{" "}
+        <span className="tracking-normal font-normal">
+          №{gameNumber} {isWinner ? "pavarei!" : "nepaėjo."}
+        </span>
+      </h2>
 
       {/* ANSWER */}
-      <div className="grid grid-cols-5 gap-1">
+      <div className="grid grid-cols-5 gap-1 my-8">
         <Row guess={targetWord} targetWord={targetWord} small />
       </div>
 
       {/* SOCIAL */}
 
-      <div className="flex my-14 py-6 w-3/4 justify-center items-center border-yellow border-y-2">
+      <div className="flex my-8 py-8 w-3/4 justify-center items-center border-yellow border-y-2">
         <div className="flex-1 flex justify-center items-center">
           <SocialStatus
             onClick={handleResultClick}
@@ -98,7 +83,7 @@ export default function Results({
 
       {/* COUNTDOWN */}
 
-      <div className="flex flex-col items-center mt-2 mb-8 select-none">
+      <div className="flex flex-col items-center my-6 select-none">
         <p className="uppercase text-sm tracking-wider">Kitas žodis už</p>
         <div className="flex py-2">
           <Countdown onTimeUp={handleTimeUp} />

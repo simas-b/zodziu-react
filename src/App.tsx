@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Board from "./components/Board";
 import Card from "./components/Card";
+import Header from "./components/Header";
 import Keyboard from "./components/Keyboard";
 import Layout from "./components/Layout";
 import Results from "./components/Results";
@@ -19,22 +20,22 @@ function App() {
 
   return (
     <Layout>
+      <Header onClick={() => setIsRulesOpen(true)} />
       <Board
         targetWord={targetWord}
         onGameEnd={setEndGameState}
         onLettersExhausted={setLettersExhausted}
       />
       <Keyboard lettersDisabled={lettersExhausted} />
-      <Card isOpen={isRulesOpen}>
-        <Rules onClose={() => setIsRulesOpen(false)} />
+      <Card isOpen={isRulesOpen} onClose={() => setIsRulesOpen(false)}>
+        <Rules />
       </Card>
       {isGameOver && (
-        <Card isOpen={isResultsOpen}>
+        <Card isOpen={isResultsOpen} onClose={() => setIsResultsOpen(false)}>
           <Results
             endGameState={endGameState}
             targetWord={targetWord}
             gameNumber={gameNumber}
-            onClose={() => setIsResultsOpen(false)}
           />
         </Card>
       )}

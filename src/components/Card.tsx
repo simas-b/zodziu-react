@@ -1,9 +1,11 @@
 import classNames from "classnames";
 import React, { ReactNode } from "react";
+import crossIcon from "../assets/cross.svg";
 
 type Props = {
   isOpen: boolean;
   children: ReactNode;
+  onClose: () => void;
 };
 
 const styles = {
@@ -20,7 +22,7 @@ const styles = {
   ],
 
   card: [
-    "duration-500",
+    "duration-300",
     "flex",
     "flex-1",
     "flex-col",
@@ -37,10 +39,10 @@ const styles = {
   ],
 
   overlay: [
+    "duration-300",
     "w-screen",
     "h-screen",
     "z-10",
-    "opacity-80",
     "bg-white",
     "fixed",
     "top-0",
@@ -48,7 +50,7 @@ const styles = {
   ],
 };
 
-export default function Card({ isOpen = false, children }: Props) {
+export default function Card({ isOpen = false, children, onClose }: Props) {
   return (
     <>
       <div className={classNames(styles.container, !isOpen && "invisible")}>
@@ -59,10 +61,25 @@ export default function Card({ isOpen = false, children }: Props) {
           )}
           style={{ maxWidth: 450 }}
         >
+          <div className="px-8 pt-4 flex justify-end w-full">
+            <div className="cursor-pointer select-none" onClick={onClose}>
+              <img
+                src={crossIcon}
+                alt="close"
+                style={{ width: "2rem", height: "2rem" }}
+              />
+            </div>
+          </div>
           {children}
         </div>
       </div>
-      <div className={classNames(styles.overlay, !isOpen && "invisible")}></div>
+
+      <div
+        className={classNames(
+          styles.overlay,
+          isOpen ? "opacity-80 visible" : "invisible opacity-0"
+        )}
+      ></div>
     </>
   );
 }

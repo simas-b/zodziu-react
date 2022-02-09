@@ -1,26 +1,12 @@
 import React from "react";
 import Square from "./Square";
-import crossIcon from "../assets/cross.svg";
 
-type Props = {
-  onClose: () => void;
-};
-
-export default function Rules({ onClose }: Props) {
+export default function Rules() {
   return (
     <div className="flex flex-col items-start px-8">
-      <div className="flex w-full justify-between items-center mb-4">
-        <h2 className="py-4 text-2xl font-semibold tracking-widest">
-          Kaip žaisti?
-        </h2>
-        <div className="cursor-pointer select-none" onClick={onClose}>
-          <img
-            src={crossIcon}
-            alt="close"
-            style={{ width: "2rem", height: "2rem" }}
-          />
-        </div>
-      </div>
+      <h2 className="py-4 text-2xl font-semibold tracking-widest">
+        Kaip žaisti?
+      </h2>
       <p className="text-justify">
         Atspėk žodį! Turi šešis bandymus. Įvesk savo variantą ir spausk Enter.
         Langelių spalvos parodys ar spėjimas buvo taiklus.
