@@ -33,18 +33,24 @@ function App() {
         onClick={handleBoardClick}
       />
       <Keyboard lettersDisabled={lettersExhausted} />
-      <Card isOpen={isRulesOpen} onClose={() => setIsRulesOpen(false)}>
-        <Rules />
-      </Card>
-      <Card isOpen={isResultsOpen} onClose={() => setIsResultsOpen(false)}>
-        {endGameState && isResultsOpen && (
-          <Results
-            endGameState={endGameState}
-            targetWord={targetWord}
-            gameNumber={gameNumber}
-          />
-        )}
-      </Card>
+
+      <div className={!isRulesOpen ? "invisible" : ""}>
+        <Card isOpen={isRulesOpen} onClose={() => setIsRulesOpen(false)}>
+          <Rules />
+        </Card>
+      </div>
+
+      <div className={!isResultsOpen ? "invisible" : ""}>
+        <Card isOpen={isResultsOpen} onClose={() => setIsResultsOpen(false)}>
+          {endGameState && (
+            <Results
+              endGameState={endGameState}
+              targetWord={targetWord}
+              gameNumber={gameNumber}
+            />
+          )}
+        </Card>
+      </div>
     </Layout>
   );
 }
