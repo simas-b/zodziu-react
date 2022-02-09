@@ -14,7 +14,7 @@ function App() {
   const [isRulesOpen, setIsRulesOpen] = useState(false);
   const [isResultsOpen, setIsResultsOpen] = useState(false);
   const isGameOver = !!endGameState;
-  // const [cssLoaded, setCssLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   const handleBoardClick = () => {
     if (isGameOver) setIsResultsOpen(true);
@@ -30,7 +30,10 @@ function App() {
   //   }, 10);
   // }, []);
 
-  // if (!cssLoaded) return null;
+  if (!loaded) {
+    setLoaded(true);
+    return null;
+  }
 
   return (
     <Layout>
@@ -48,11 +51,11 @@ function App() {
       </Card>
 
       <Card isOpen={isResultsOpen} onClose={() => setIsResultsOpen(false)}>
-          <Results
-            endGameState={endGameState || []}
-            targetWord={targetWord}
-            gameNumber={gameNumber}
-          />
+        <Results
+          endGameState={endGameState || []}
+          targetWord={targetWord}
+          gameNumber={gameNumber}
+        />
       </Card>
     </Layout>
   );
