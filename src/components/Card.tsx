@@ -10,6 +10,7 @@ type Props = {
 
 const styles = {
   container: [
+    "transition-all",
     "select-none",
     "absolute",
     "flex",
@@ -39,6 +40,7 @@ const styles = {
   ],
 
   overlay: [
+    "transition-all",
     "duration-300",
     "w-screen",
     "h-screen",
