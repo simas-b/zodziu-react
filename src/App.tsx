@@ -14,7 +14,6 @@ function App() {
   const [isRulesOpen, setIsRulesOpen] = useState(false);
   const [isResultsOpen, setIsResultsOpen] = useState(false);
   const isGameOver = !!endGameState;
-  const [loaded, setLoaded] = useState(false);
 
   const handleBoardClick = () => {
     if (isGameOver) setIsResultsOpen(true);
@@ -29,11 +28,6 @@ function App() {
   //     setCssLoaded(true);
   //   }, 10);
   // }, []);
-
-  if (!loaded) {
-    setLoaded(true);
-    return null;
-  }
 
   return (
     <Layout>

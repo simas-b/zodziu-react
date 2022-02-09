@@ -10,8 +10,6 @@ type Props = {
 
 const styles = {
   container: [
-    "transition-all",
-    "duration-500",
     "select-none",
     "absolute",
     "flex",
@@ -59,8 +57,12 @@ export default function Card({ isOpen = false, children, onClose }: Props) {
       <div
         className={classNames(
           styles.container,
-          isOpen ? "visible opacity-1" : "invisible opacity-0 -translate-y-64"
+          isOpen ? "opacity-1" : "opacity-0 -translate-y-64"
         )}
+        style={{
+          visibility: isOpen ? "visible" : "hidden",
+          transition: "all 0.5s ease",
+        }}
       >
         <div className={classNames(styles.card)} style={{ maxWidth: 450 }}>
           <div className="px-8 pt-4 flex justify-end w-full">
@@ -79,8 +81,12 @@ export default function Card({ isOpen = false, children, onClose }: Props) {
       <div
         className={classNames(
           styles.overlay,
-          isOpen ? "visible opacity-80" : "invisible opacity-0"
+          isOpen ? "opacity-80" : "opacity-0"
         )}
+        style={{
+          visibility: isOpen ? "visible" : "hidden",
+          transition: "all 0.5s ease",
+        }}
       ></div>
     </>
   );
