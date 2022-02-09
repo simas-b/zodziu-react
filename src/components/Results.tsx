@@ -19,15 +19,30 @@ export default function Results({
   onClose,
 }: Props) {
   const isWinner = endGameState[5] === targetWord;
-  const [isIconsCopied, setIconsCopied] = useState<boolean>(false);
+  const [isResultCopied, setIsResultCopied] = useState<boolean>(false);
+
+  //   const shareFunctionAvailable = typeof navigator.share === "function";
 
   const handleTimeUp = () => {
     console.log("time is up");
   };
 
-  const handleIconsCopied = () => {
-    setIconsCopied(true);
-    setTimeout(() => setIconsCopied(false), 10000);
+  const handleResultClick = (socialText: string) => {
+    // if (shareFunctionAvailable) {
+    //   navigator
+    //     .share({ text: socialText })
+    //     .then(() => {
+    //       setIsResultCopied(true);
+    //     })
+    //     .catch((error) => {
+    //       console.error("Error: could not share game results", error.message);
+    //     });
+    // }
+    // return;
+
+    // Simple navigator clipboard as fallback
+    navigator.clipboard.writeText(socialText);
+    setIsResultCopied(true);
   };
 
   return (
@@ -52,7 +67,7 @@ export default function Results({
       <div className="flex my-14 py-6 w-3/4 justify-center items-center border-yellow border-y-2">
         <div className="flex-1 flex justify-center items-center">
           <SocialStatus
-            onCopied={handleIconsCopied}
+            onClick={handleResultClick}
             targetWord={targetWord}
             endGameState={endGameState}
             gameNumber={gameNumber}
@@ -61,7 +76,7 @@ export default function Results({
 
         <div className="flex-1 flex flex-col justify-center items-start pl-4">
           <p id="share-text">
-            {isIconsCopied ? "Nukopijuota!" : "Dalinkis rezultatu"}
+            {isResultCopied ? "Nukopijuota!" : "Dalinkis rezultatu"}
           </p>
           <p className="py-1"></p>
           <img

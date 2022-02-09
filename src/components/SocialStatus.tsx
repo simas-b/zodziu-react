@@ -6,7 +6,7 @@ type Props = {
   endGameState: string[];
   targetWord: string;
   gameNumber: number;
-  onCopied: () => void;
+  onClick: (socialText: string) => void;
 };
 
 const styles = {
@@ -25,26 +25,18 @@ const styles = {
 export default function SocialStatus({
   endGameState,
   targetWord,
-  onCopied,
+  onClick,
   gameNumber,
 }: Props) {
   const icons = generateSocialIcons(endGameState, targetWord);
 
   const socialText = `ŽÓDŽIU №${gameNumber}\n\n` + icons;
 
-  const handleClick = () => {
-    navigator.share({ text: socialText }).catch(() => {
-      console.log(
-        "navigator.share functionality unavailable. Trying to copy to clipboard"
-      );
-      navigator.clipboard.writeText(socialText);
-    });
-
-    onCopied();
-  };
-
   return (
-    <div className={classNames(styles.container)} onClick={handleClick}>
+    <div
+      className={classNames(styles.container)}
+      onClick={() => onClick(socialText)}
+    >
       {icons.map((icons, index) => (
         <div key={index}>{icons}</div>
       ))}
