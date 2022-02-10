@@ -11,7 +11,7 @@ type Props = {
 export default function Board({ targetWord, onSubmit, guesses }: Props) {
   const rows = arrayPadEnd(guesses, undefined, 6);
   const activeRowIndex = guesses.length;
-  const gameIsOver = (guesses.length =
+  const gameIsOver = (guesses.length ===
     6 || guesses[guesses.length - 1] === targetWord);
 
   return (
