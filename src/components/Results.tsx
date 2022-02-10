@@ -67,7 +67,7 @@ export default function Results({ targetWord, gameNumber, onTimeUp }: Props) {
 
   return (
     <>
-      <h2 className="text-xl font-semibold tracking-widest my-4">
+      <h2 className="text-xl font-semibold tracking-widest" my-2>
         <Logo />{" "}
         <span className="tracking-normal font-normal">
           №{gameNumber} {isWinner ? "pavarei!" : "nepaėjo."}
@@ -75,7 +75,7 @@ export default function Results({ targetWord, gameNumber, onTimeUp }: Props) {
       </h2>
 
       {/* ANSWER */}
-      <div className="grid grid-cols-5 gap-1 my-8 pt-1">
+      <div className="grid grid-cols-5 gap-1 my-4 pt-1">
         <Row guess={targetWord} targetWord={targetWord} small />
       </div>
 
@@ -83,7 +83,7 @@ export default function Results({ targetWord, gameNumber, onTimeUp }: Props) {
       {(isNavigatorShareAvailable || isNavigatorClipboardAvailable) &&
         !isSharingBroken && (
           <div
-            className="flex my-8 py-8 w-3/4 justify-center items-center border-yellow border-y-2 cursor-pointer"
+            className="flex my-4 py-4 w-3/4 justify-center items-center border-yellow border-y-2 cursor-pointer"
             onClick={handleSocialClick}
           >
             <div className="flex-1 flex justify-center items-center">
@@ -110,7 +110,7 @@ export default function Results({ targetWord, gameNumber, onTimeUp }: Props) {
 
       {/* COUNTDOWN */}
 
-      <div className="flex flex-col items-center my-6 select-none">
+      <div className="flex flex-col items-center my-2 select-none">
         <p className="uppercase text-sm tracking-wider">Kitas žodis už</p>
         <div className="flex py-2">
           <Countdown onTimeUp={onTimeUp} />
