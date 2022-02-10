@@ -47,7 +47,7 @@ export default function Key({
         isEnterColored
           ? "bg-green text-bright"
           : isGreen
-          ? "bg-green text-bright"
+          ? "bg-green text-bright" 
           : isYellow
           ? "bg-yellow text-bright"
           : "bg-silver text-dark"
@@ -56,7 +56,7 @@ export default function Key({
       style={{
         flex: spacer ? "none" : wide ? 1.8 : 1,
         visibility: spacer ? "hidden" : "visible",
-        opacity: disabled ? 0.3 : 1,
+        opacity: isGreen ? 0.9 : isYellow ? 0.9 : disabled ? 0.3 : 1,
       }}
     >
       {children}
