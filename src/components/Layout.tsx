@@ -14,7 +14,7 @@ export default function Layout({ children }: Props) {
 }
 
 const styles = {
-  main: ["h-screen", "p-4", "items-center", "text-dark", "bg-white"],
+  main: ["h-full", "p-2", "items-center", "text-dark", "bg-white"],
   container: [
     "flex",
     "flex-col",

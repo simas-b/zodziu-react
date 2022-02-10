@@ -10,26 +10,26 @@ type Props = {
 
 const styles = {
   container: [
-    "select-none",
-    "absolute",
-    "flex",
-    "items-center",
-    "justify-center",
-    "w-screen",
-    "h-screen",
+    "fixed",
     "top-0",
     "left-0",
+    "w-full",
+    "h-full",
+    "flex",
+    "flex-col",
+    "items-center",
+    "justify-center",
     "z-20",
+    "select-none",
+    "py-4"
   ],
 
   card: [
     "flex",
-    "flex-1",
     "flex-col",
-    "justify-center",
+    "flex-none",
     "items-center",
-    "m-4",
-    "py-4",
+    "p-4",
     "border-silver",
     "border-2",
     "rounded-md",
@@ -38,15 +38,6 @@ const styles = {
     "z-30",
   ],
 
-  overlay: [
-    "w-screen",
-    "h-screen",
-    "z-10",
-    "bg-white",
-    "fixed",
-    "top-0",
-    "left-0",
-  ],
 };
 
 export default function Card({ isOpen = false, children, onClose }: Props) {
@@ -56,6 +47,9 @@ export default function Card({ isOpen = false, children, onClose }: Props) {
         className={classNames(styles.container)}
         style={{
           visibility: isOpen ? "visible" : "hidden",
+          overflow: "hidden",
+          backgroundColor: "rgb(255,255,255,0.8)",
+          maxHeight: "100%"
         }}
       >
         <div
@@ -63,10 +57,16 @@ export default function Card({ isOpen = false, children, onClose }: Props) {
             styles.card,
             isOpen ? "opacity-1" : "opacity-0 -translate-y-64"
           )}
-          style={{ maxWidth: 450, transition: "all 0.5s ease" }}
+          style={{
+            width: "90%",
+            maxWidth: 450,
+            maxHeight: "100%",
+            transition: "all 0.5s ease",
+            overflowY: "scroll",
+          }}
         >
           {onClose && (
-            <div className="px-8 pt-4 flex justify-end w-full">
+            <div className="flex justify-end w-full">
               <div className="cursor-pointer select-none" onClick={onClose}>
                 <img
                   src={crossIcon}
@@ -79,17 +79,6 @@ export default function Card({ isOpen = false, children, onClose }: Props) {
           {children}
         </div>
       </div>
-
-      <div
-        className={classNames(
-          styles.overlay,
-          isOpen ? "opacity-80" : "opacity-0"
-        )}
-        style={{
-          visibility: isOpen ? "visible" : "hidden",
-          transition: "all 0.5s ease",
-        }}
-      ></div>
     </>
   );
 }
