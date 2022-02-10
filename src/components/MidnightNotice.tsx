@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-type Props = {
-};
-
-export default function MidnightNotice({ }: Props) {
+export default function MidnightNotice() {
   const [secondsLeft, setSecondsLeft] = useState(10);
 
   useEffect(() => {
