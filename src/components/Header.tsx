@@ -16,7 +16,10 @@ export default function Header({
   onClockClick,
 }: Props) {
   return (
-    <div className="flex items-center justify-between custom-header-size">
+    <div
+      className="flex w-full items-center justify-between"
+      style={{ maxWidth: 450 }}
+    >
       <h2 className="text-2xl font-semibold tracking-widest">
         <Logo />
       </h2>
@@ -34,7 +37,10 @@ export default function Header({
             className="custom-question-button-size"
           />
         </div>
-        <div className="cursor-pointer select-none pl-4" onClick={onQuestionClick}>
+        <div
+          className="cursor-pointer select-none pl-4"
+          onClick={onQuestionClick}
+        >
           <img
             src={questionIcon}
             alt="Game rules"
