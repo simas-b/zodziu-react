@@ -9,10 +9,7 @@ export const isNavigatorShareAvailable =
 export const isNavigatorClipboardAvailable =
   typeof navigator.clipboard.writeText === "function";
 
-export const isSharingBroken = () => {
+export const isSharingBroken =
   // navigator.clipboard and navigator.share does not work on fb app
-  return (
-    window.navigator.userAgent.includes("FBAV") ||
-    window.navigator.userAgent.includes("MiuiBrowser")
-  );
-};
+  window.navigator.userAgent.includes("FBAV") ||
+  window.navigator.userAgent.includes("MiuiBrowser");
