@@ -5,7 +5,7 @@ import crossIcon from "../assets/cross.svg";
 type Props = {
   isOpen: boolean;
   children: ReactNode;
-  onClose: () => void;
+  onClose?: () => void;
 };
 
 const styles = {
@@ -65,15 +65,17 @@ export default function Card({ isOpen = false, children, onClose }: Props) {
           )}
           style={{ maxWidth: 450, transition: "all 0.5s ease" }}
         >
-          <div className="px-8 pt-4 flex justify-end w-full">
-            <div className="cursor-pointer select-none" onClick={onClose}>
-              <img
-                src={crossIcon}
-                alt="close"
-                style={{ width: "2rem", height: "2rem" }}
-              />
+          {onClose && (
+            <div className="px-8 pt-4 flex justify-end w-full">
+              <div className="cursor-pointer select-none" onClick={onClose}>
+                <img
+                  src={crossIcon}
+                  alt="close"
+                  style={{ width: "2rem", height: "2rem" }}
+                />
+              </div>
             </div>
-          </div>
+          )}
           {children}
         </div>
       </div>

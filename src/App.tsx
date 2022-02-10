@@ -4,6 +4,7 @@ import Card from "./components/Card";
 import Header from "./components/Header";
 import Keyboard from "./components/Keyboard";
 import Layout from "./components/Layout";
+import MidnightNotice from "./components/MidnightNotice";
 import Results from "./components/Results";
 import Rules from "./components/Rules";
 import { targetWord, gameNumber } from "./gameSetup";
@@ -16,9 +17,12 @@ function App() {
 
   const [isRulesOpen, setIsRulesOpen] = useState(false);
   const [isResultsOpen, setIsResultsOpen] = useState(false);
+  const [isMidnightNoticeOpen, setIsMidnightNoticeOpen] = useState(false);
 
-  const gameIsOver =
+  let gameIsOver =
     guesses.length === 6 || guesses[guesses.length - 1] === targetWord;
+
+  // HANDLE SUBMIT
 
   const handleSubmit = (guess: string) => {
     if (guess.length !== 5)
@@ -30,13 +34,28 @@ function App() {
     });
   };
 
+  // HANDLE TIME UP
+  const handleTimeUp = () => {
+    if (isResultsOpen) {
+      window.location.reload();
+    }
+
+    setIsRulesOpen(false);
+    setIsMidnightNoticeOpen(true);
+    setTimeout(() => window.location.reload(), 10000);
+  };
+
+  // REMOVE EXHAUSTED LETTERS
+
   useEffect(() => {
     setLettersExhausted(getLettersExhausted(targetWord, guesses));
   }, [guesses]);
 
+  // OPEN RESULTS ON GAME OVER
+
   useEffect(() => {
-    if (gameIsOver) setIsResultsOpen(true);
-  }, [guesses, gameIsOver]);
+    if (gameIsOver && !isMidnightNoticeOpen) setIsResultsOpen(true);
+  }, [guesses, gameIsOver, isMidnightNoticeOpen]);
 
   return (
     <Layout>
@@ -59,7 +78,15 @@ function App() {
       </Card>
 
       <Card isOpen={isResultsOpen} onClose={() => setIsResultsOpen(false)}>
-        <Results targetWord={targetWord} gameNumber={gameNumber} />
+        <Results
+          targetWord={targetWord}
+          gameNumber={gameNumber}
+          onTimeUp={handleTimeUp}
+        />
+      </Card>
+
+      <Card isOpen={isMidnightNoticeOpen}>
+        {isMidnightNoticeOpen && <MidnightNotice />}
       </Card>
     </Layout>
   );

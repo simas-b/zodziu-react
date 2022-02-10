@@ -10,9 +10,10 @@ import generateSocialIcons from "../utils/generateSocialIcons";
 type Props = {
   targetWord: string;
   gameNumber: number;
+  onTimeUp: ()=>void;
 };
 
-export default function Results({ targetWord, gameNumber }: Props) {
+export default function Results({ targetWord, gameNumber, onTimeUp }: Props) {
   const endGameState = loadState(targetWord);
   const isWinner = endGameState[endGameState.length - 1] === targetWord;
   const [isResultCopiedToClipboard, setIsResultCopiedToClipboard] =
@@ -30,11 +31,6 @@ export default function Results({ targetWord, gameNumber }: Props) {
 
   const navigatorClipboardAvailable =
     typeof navigator.clipboard.writeText === "function";
-
-  // Reload on countdown time up
-  const handleTimeUp = () => {
-    window.location.reload();
-  };
 
   const handleSocialClick = () => {
     // If browser supports navigator.share, use it and return
@@ -121,7 +117,7 @@ export default function Results({ targetWord, gameNumber }: Props) {
       <div className="flex flex-col items-center my-6 select-none">
         <p className="uppercase text-sm tracking-wider">Kitas žodis už</p>
         <div className="flex py-2">
-          <Countdown onTimeUp={handleTimeUp} />
+          <Countdown onTimeUp={onTimeUp} />
         </div>
       </div>
     </>
