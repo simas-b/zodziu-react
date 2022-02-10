@@ -1,6 +1,5 @@
 import React from "react";
 import Key from "./Key";
-import enterIcon from "../assets/enter.svg";
 import deleteIcon from "../assets/delete.svg";
 
 type Props = {
