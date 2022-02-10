@@ -62,7 +62,7 @@ export default function Card({ isOpen = false, children, onClose }: Props) {
             maxWidth: 450,
             maxHeight: "100%",
             transition: "all 0.5s ease",
-            overflowY: "scroll",
+            overflowY: "auto",
           }}
         >
           {onClose && (
