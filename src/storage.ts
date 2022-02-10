@@ -8,6 +8,10 @@ const STORAGE_KEY = "gameHistory";
 
 const gameHistory = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
 
+function isFirstTime() {
+  return !localStorage.getItem(STORAGE_KEY);
+}
+
 function loadState(targetWord: string) {
   const lastEntry = getLastHistoryEntry();
   if (lastEntry === undefined) return [];
@@ -38,4 +42,4 @@ function persist() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(gameHistory));
 }
 
-export { loadState, saveState };
+export { loadState, saveState, isFirstTime };

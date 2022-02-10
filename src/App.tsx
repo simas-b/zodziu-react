@@ -8,14 +8,14 @@ import MidnightNotice from "./components/MidnightNotice";
 import Results from "./components/Results";
 import Rules from "./components/Rules";
 import { targetWord, gameNumber } from "./gameSetup";
-import { loadState, saveState } from "./storage";
+import { loadState, saveState, isFirstTime } from "./storage";
 import getLettersExhausted from "./utils/getLettersExhausted";
 
 function App() {
   const [lettersExhausted, setLettersExhausted] = useState<string[]>([]);
   const [guesses, setGuesses] = useState<string[]>(loadState(targetWord));
 
-  const [isRulesOpen, setIsRulesOpen] = useState(false);
+  const [isRulesOpen, setIsRulesOpen] = useState(isFirstTime());
   const [isResultsOpen, setIsResultsOpen] = useState(false);
   const [isMidnightNoticeOpen, setIsMidnightNoticeOpen] = useState(false);
 
