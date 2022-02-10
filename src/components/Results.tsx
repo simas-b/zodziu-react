@@ -5,40 +5,69 @@ import Countdown from "./Countdown";
 import SocialStatus from "./SocialStatus";
 import Row from "./Row";
 import { loadState } from "../storage";
+import generateSocialIcons from "../utils/generateSocialIcons";
 
 type Props = {
   targetWord: string;
   gameNumber: number;
 };
 
-export default function Results({
-  targetWord,
-  gameNumber,
-}: Props) {
+export default function Results({ targetWord, gameNumber }: Props) {
   const endGameState = loadState(targetWord);
   const isWinner = endGameState[endGameState.length - 1] === targetWord;
-  const [isResultCopied, setIsResultCopied] = useState<boolean>(false);
+  const [isResultCopiedToClipboard, setIsResultCopiedToClipboard] =
+    useState<boolean>(false);
 
-  // Reload on time up
+  const icons = generateSocialIcons(endGameState, targetWord);
+  const socialText = `ŽÓDŽIU №${gameNumber}\n\n` + icons.join("\n");
+
+  const navigatorShareAvailable =
+    typeof navigator.share === "function" &&
+    navigator.canShare({ text: socialText });
+  const navigatorClipboardAvailable =
+    typeof navigator.clipboard.writeText === "function";
+
+  // Reload on countdown time up
   const handleTimeUp = () => {
     window.location.reload();
   };
 
-  const handleResultClick = (socialText: string) => {
-    if (
-      typeof navigator.share === "function" &&
-      navigator.canShare({ text: socialText })
-    ) {
-      navigator.share({ text: socialText }).catch((error) => {
-        console.error("Error: could not share game results", error.message);
-      });
+  const handleSocialClick = () => {
+    // If browser supports navigator.share, use it and return
+    if (navigatorShareAvailable) {
+      console.log("Using navigator.share to share game results");
+
+      navigator
+        .share({ text: socialText })
+        .then(() => {
+          console.log("navigator.share successful");
+        })
+        .catch((error) => {
+          console.error("Error: could not share game results", error.message);
+        });
+
       return;
     }
 
-    // Simple navigator clipboard as fallback
-    navigator.clipboard.writeText(socialText);
-    setIsResultCopied(true);
-    setTimeout(() => setIsResultCopied(false), 10000);
+    // If browser supports navigator.clipboard.writeText, use it and return
+    if (navigatorClipboardAvailable) {
+      console.log("Using navigator.clipboard to share game results");
+      navigator.clipboard
+        .writeText(socialText)
+        .then(() => {
+          console.log("navigator.clipboard.writeText successful");
+          setIsResultCopiedToClipboard(true);
+
+          // Show "result copied" message only for 10 seconds
+          // in case user wants to come back and copy it again later
+          setTimeout(() => setIsResultCopiedToClipboard(false), 10000);
+        })
+        .catch((error) => {
+          console.error("Error: could not share game results", error.message);
+        });
+
+      return;
+    }
   };
 
   return (
@@ -51,36 +80,37 @@ export default function Results({
       </h2>
 
       {/* ANSWER */}
-      <div className="grid grid-cols-5 gap-1 my-8">
+      <div className="grid grid-cols-5 gap-1 my-8 pt-1">
         <Row guess={targetWord} targetWord={targetWord} small />
       </div>
 
       {/* SOCIAL */}
+      {(navigatorShareAvailable || navigatorClipboardAvailable) && (
+        <div
+          className="flex my-8 py-8 w-3/4 justify-center items-center border-yellow border-y-2 cursor-pointer"
+          onClick={handleSocialClick}
+        >
+          <div className="flex-1 flex justify-center items-center">
+            <SocialStatus icons={icons} />
+          </div>
 
-      <div className="flex my-8 py-8 w-3/4 justify-center items-center border-yellow border-y-2">
-        <div className="flex-1 flex justify-center items-center">
-          <SocialStatus
-            onClick={handleResultClick}
-            targetWord={targetWord}
-            endGameState={endGameState}
-            gameNumber={gameNumber}
-          />
+          <div className="flex-1 flex flex-col justify-center items-start pl-4">
+            <p id="share-text">
+              {isResultCopiedToClipboard
+                ? "Nukopijuota!"
+                : "Dalinkis rezultatu"}
+            </p>
+            <p className="py-1"></p>
+            <img
+              src={arrowIcon}
+              alt=""
+              width="40"
+              height="40"
+              className="select-none"
+            />
+          </div>
         </div>
-
-        <div className="flex-1 flex flex-col justify-center items-start pl-4">
-          <p id="share-text">
-            {isResultCopied ? "Nukopijuota!" : "Dalinkis rezultatu"}
-          </p>
-          <p className="py-1"></p>
-          <img
-            src={arrowIcon}
-            alt=""
-            width="40"
-            height="40"
-            className="select-none"
-          />
-        </div>
-      </div>
+      )}
 
       {/* COUNTDOWN */}
 

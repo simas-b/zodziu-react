@@ -1,12 +1,8 @@
 import classNames from "classnames";
 import React from "react";
-import generateSocialIcons from "../utils/generateSocialIcons";
 
 type Props = {
-  endGameState: string[];
-  targetWord: string;
-  gameNumber: number;
-  onClick: (socialText: string) => void;
+  icons: string[];
 };
 
 const styles = {
@@ -22,21 +18,9 @@ const styles = {
   ],
 };
 
-export default function SocialStatus({
-  endGameState,
-  targetWord,
-  onClick,
-  gameNumber,
-}: Props) {
-  const icons = generateSocialIcons(endGameState, targetWord);
-
-  const socialText = `ŽÓDŽIU №${gameNumber}\n\n` + icons.join("\n");
-
+export default function SocialStatus({ icons }: Props) {
   return (
-    <div
-      className={classNames(styles.container)}
-      onClick={() => onClick(socialText)}
-    >
+    <div className={classNames(styles.container)}>
       {icons.map((icons, index) => (
         <div key={index}>{icons}</div>
       ))}
