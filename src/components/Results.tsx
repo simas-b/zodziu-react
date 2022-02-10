@@ -23,7 +23,11 @@ export default function Results({ targetWord, gameNumber }: Props) {
 
   const navigatorShareAvailable =
     typeof navigator.share === "function" &&
-    navigator.canShare({ text: socialText });
+    navigator.canShare({ text: socialText }) &&
+    // crude way to disable navigatorShare on desktop safari's
+    // only use it for smaller mobile screens
+    window.screen.width < 800;
+
   const navigatorClipboardAvailable =
     typeof navigator.clipboard.writeText === "function";
 
