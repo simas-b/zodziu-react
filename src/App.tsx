@@ -20,6 +20,7 @@ function App() {
   const isGameOver = guesses[guesses.length - 1] === targetWord;
 
   const handleBoardClick = () => {
+    console.log('game is over?', isGameOver, guesses)
     if (isGameOver) setIsResultsOpen(true);
   };
 

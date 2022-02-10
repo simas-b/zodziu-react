@@ -20,7 +20,7 @@ export default function Board({
   const isGameOver = guesses[guesses.length - 1] === targetWord;
 
   return (
-    <div className="grid grid-cols-5 gap-1 my-2" onClick={onClick}>
+    <div className="grid grid-cols-5 gap-1 my-2 cursor-pointer" onClick={onClick}>
       {rows.map((_, index) => (
         <Row
           onSubmit={onSubmit}
