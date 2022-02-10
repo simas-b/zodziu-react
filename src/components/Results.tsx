@@ -24,6 +24,7 @@ export default function Results({ targetWord, gameNumber, onTimeUp }: Props) {
 
   const navigatorShareAvailable =
     typeof navigator.share === "function" &&
+    typeof navigator.canShare === "function" &&
     navigator.canShare({ text: socialText }) &&
     // crude way to disable navigatorShare on desktop safari's
     // only use it for smaller mobile screens
