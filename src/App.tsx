@@ -38,6 +38,7 @@ function App() {
   const handleTimeUp = () => {
     if (isResultsOpen) {
       window.location.reload();
+      return;
     }
 
     setIsRulesOpen(false);
