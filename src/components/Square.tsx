@@ -23,7 +23,6 @@ const style = [
   "justify-center",
   "uppercase",
   "select-none",
-  "duration-500",
   "border-2",
   "shadow-md",
 ];
@@ -45,6 +44,7 @@ export default function Square({
         colorClass[color],
         active ? "border-dark" : ""
       )}
+      style={{transition: "background-color 0.5s ease"}}
     >
       {letter}
     </div>
