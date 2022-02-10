@@ -17,12 +17,8 @@ function App() {
   const [isRulesOpen, setIsRulesOpen] = useState(false);
   const [isResultsOpen, setIsResultsOpen] = useState(false);
 
-  const isGameOver = guesses[guesses.length - 1] === targetWord;
-
-  const handleBoardClick = () => {
-    console.log('game is over?', isGameOver, guesses)
-    if (isGameOver) setIsResultsOpen(true);
-  };
+  const gameIsOver =
+    guesses.length === 6 || guesses[guesses.length - 1] === targetWord;
 
   const handleSubmit = (guess: string) => {
     if (guess.length !== 5)
@@ -39,18 +35,20 @@ function App() {
   }, [guesses]);
 
   useEffect(() => {
-    if (guesses.length === 6 || guesses[guesses.length - 1] === targetWord)
-      setIsResultsOpen(true);
-  }, [guesses]);
+    if (gameIsOver) setIsResultsOpen(true);
+  }, [guesses, gameIsOver]);
 
   return (
     <Layout>
-      <Header onClick={() => setIsRulesOpen(true)} />
+      <Header
+        isClockVisible={gameIsOver}
+        onClockClick={() => gameIsOver && setIsResultsOpen(true)}
+        onQuestionClick={() => setIsRulesOpen(true)}
+      />
       <Board
         targetWord={targetWord}
         onSubmit={handleSubmit}
         guesses={guesses}
-        onClick={handleBoardClick}
       />
 
       <Keyboard lettersDisabled={lettersExhausted} />
