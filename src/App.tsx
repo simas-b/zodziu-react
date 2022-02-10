@@ -35,6 +35,7 @@ function App() {
   };
 
   // HANDLE TIME UP
+
   const handleTimeUp = () => {
     if (isResultsOpen) {
       window.location.reload();
