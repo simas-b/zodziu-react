@@ -7,6 +7,7 @@ type Props = {
 
 const styles = {
   container: [
+    "flex-none",
     "shadow-lg",
     "shadow-silver",
     "select-none",
