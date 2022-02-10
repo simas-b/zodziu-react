@@ -1,9 +1,13 @@
 import React from "react";
 import Square from "./Square";
 
-export default function Rules() {
+type Props = {
+  onClose: () => void;
+};
+
+export default function Rules({ onClose }: Props) {
   return (
-    <div className="flex flex-col items-start px-8">
+    <div className="flex flex-col items-start px-8" onClick={onClose}>
       <h2 className="py-4 text-2xl font-semibold tracking-widest">
         Kaip žaisti?
       </h2>

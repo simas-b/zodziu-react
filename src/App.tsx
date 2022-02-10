@@ -79,7 +79,7 @@ function App() {
       <Keyboard lettersDisabled={lettersExhausted} />
 
       <Card isOpen={isRulesOpen} onClose={() => setIsRulesOpen(false)}>
-        <Rules />
+        <Rules onClose={() => setIsRulesOpen(false)} />
       </Card>
 
       <Card isOpen={isResultsOpen} onClose={() => setIsResultsOpen(false)}>
