@@ -55,7 +55,10 @@ function App() {
   // OPEN RESULTS ON GAME OVER
 
   useEffect(() => {
-    if (gameIsOver && !isMidnightNoticeOpen) setIsResultsOpen(true);
+    if (gameIsOver && !isMidnightNoticeOpen) {
+      // Open results after 2 seconds so user has time to see last guess evaluation
+      setTimeout(() => setIsResultsOpen(true), 2000);
+    }
   }, [guesses, gameIsOver, isMidnightNoticeOpen]);
 
   return (
