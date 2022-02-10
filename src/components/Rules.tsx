@@ -13,7 +13,7 @@ export default function Rules({ onClose }: Props) {
       </h2>
       <p className="text-justify mb-8">
         Atspėk žodį! Turi šešis bandymus. Įvesk savo variantą ir spausk Enter.
-        Langelių spalvos parodys ar spėjimas buvo taiklus.
+        Langelių spalvos parodys, ar spėjimas buvo taiklus.
       </p>
       <div className="grid grid-cols-5 gap-1 mt-2">
         <Square color="white" letter="s" small />
