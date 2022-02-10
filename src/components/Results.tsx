@@ -6,11 +6,16 @@ import SocialStatus from "./SocialStatus";
 import Row from "./Row";
 import { loadState } from "../storage";
 import generateSocialIcons from "../utils/generateSocialIcons";
+import {
+  isNavigatorShareAvailable,
+  isNavigatorClipboardAvailable,
+  isSharingBroken,
+} from "../utils/systemInfo";
 
 type Props = {
   targetWord: string;
   gameNumber: number;
-  onTimeUp: ()=>void;
+  onTimeUp: () => void;
 };
 
 export default function Results({ targetWord, gameNumber, onTimeUp }: Props) {
@@ -22,20 +27,9 @@ export default function Results({ targetWord, gameNumber, onTimeUp }: Props) {
   const icons = generateSocialIcons(endGameState, targetWord);
   const socialText = `ŽÓDŽIU №${gameNumber}\n\n` + icons.join("\n");
 
-  const navigatorShareAvailable =
-    typeof navigator.share === "function" &&
-    typeof navigator.canShare === "function" &&
-    navigator.canShare({ text: socialText }) &&
-    // crude way to disable navigatorShare on desktop safari's
-    // only use it for smaller mobile screens
-    window.screen.width < 800;
-
-  const navigatorClipboardAvailable =
-    typeof navigator.clipboard.writeText === "function";
-
   const handleSocialClick = () => {
     // If browser supports navigator.share, use it and return
-    if (navigatorShareAvailable) {
+    if (isNavigatorShareAvailable) {
       console.log("Using navigator.share to share game results");
 
       navigator
@@ -51,7 +45,7 @@ export default function Results({ targetWord, gameNumber, onTimeUp }: Props) {
     }
 
     // If browser supports navigator.clipboard.writeText, use it and return
-    if (navigatorClipboardAvailable) {
+    if (isNavigatorClipboardAvailable) {
       console.log("Using navigator.clipboard to share game results");
       navigator.clipboard
         .writeText(socialText)
@@ -86,32 +80,33 @@ export default function Results({ targetWord, gameNumber, onTimeUp }: Props) {
       </div>
 
       {/* SOCIAL */}
-      {(navigatorShareAvailable || navigatorClipboardAvailable) && (
-        <div
-          className="flex my-8 py-8 w-3/4 justify-center items-center border-yellow border-y-2 cursor-pointer"
-          onClick={handleSocialClick}
-        >
-          <div className="flex-1 flex justify-center items-center">
-            <SocialStatus icons={icons} />
-          </div>
+      {(isNavigatorShareAvailable || isNavigatorClipboardAvailable) &&
+        !isSharingBroken && (
+          <div
+            className="flex my-8 py-8 w-3/4 justify-center items-center border-yellow border-y-2 cursor-pointer"
+            onClick={handleSocialClick}
+          >
+            <div className="flex-1 flex justify-center items-center">
+              <SocialStatus icons={icons} />
+            </div>
 
-          <div className="flex-1 flex flex-col justify-center items-start pl-4">
-            <p id="share-text">
-              {isResultCopiedToClipboard
-                ? "Nukopijuota!"
-                : "Dalinkis rezultatu"}
-            </p>
-            <p className="py-1"></p>
-            <img
-              src={arrowIcon}
-              alt=""
-              width="40"
-              height="40"
-              className="select-none"
-            />
+            <div className="flex-1 flex flex-col justify-center items-start pl-4">
+              <p id="share-text">
+                {isResultCopiedToClipboard
+                  ? "Nukopijuota!"
+                  : "Dalinkis rezultatu"}
+              </p>
+              <p className="py-1"></p>
+              <img
+                src={arrowIcon}
+                alt=""
+                width="40"
+                height="40"
+                className="select-none"
+              />
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
       {/* COUNTDOWN */}
 
