@@ -14,6 +14,7 @@ import getLettersExhausted from "./utils/getLettersExhausted";
 function App() {
   const [lettersExhausted, setLettersExhausted] = useState<string[]>([]);
   const [guesses, setGuesses] = useState<string[]>(loadState(targetWord));
+  const [isWordFull, setIsWordFull] = useState(false);
 
   const [isRulesOpen, setIsRulesOpen] = useState(isFirstTime());
   const [isResultsOpen, setIsResultsOpen] = useState(false);
@@ -74,9 +75,11 @@ function App() {
         onSubmit={handleSubmit}
         guesses={guesses}
         gameIsOver={gameIsOver}
+        onActiveWordFull={() => setIsWordFull(true)}
+        onActiveWordNotFull={() => setIsWordFull(false)}
       />
 
-      <Keyboard lettersDisabled={lettersExhausted} />
+      <Keyboard lettersDisabled={lettersExhausted} isWordFull={isWordFull} />
 
       <Card isOpen={isRulesOpen} onClose={() => setIsRulesOpen(false)}>
         <Rules onClose={() => setIsRulesOpen(false)} />

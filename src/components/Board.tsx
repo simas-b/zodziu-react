@@ -7,6 +7,8 @@ type Props = {
   onSubmit: (guess: string) => void;
   guesses: string[];
   gameIsOver: boolean;
+  onActiveWordFull: () => void;
+  onActiveWordNotFull: () => void;
 };
 
 export default function Board({
@@ -14,6 +16,8 @@ export default function Board({
   onSubmit,
   guesses,
   gameIsOver,
+  onActiveWordFull,
+  onActiveWordNotFull,
 }: Props) {
   const rows = arrayPadEnd(guesses, undefined, 6);
   const activeRowIndex = guesses.length;
@@ -27,6 +31,8 @@ export default function Board({
           guess={guesses[index]}
           key={index}
           isActive={!gameIsOver && index === activeRowIndex}
+          onActiveWordFull={onActiveWordFull}
+          onActiveWordNotFull={onActiveWordNotFull}
         />
       ))}
     </div>

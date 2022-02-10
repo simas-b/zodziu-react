@@ -5,6 +5,7 @@ import deleteIcon from "../assets/delete.svg";
 
 type Props = {
   lettersDisabled: string[];
+  isWordFull: boolean;
 };
 
 const row1 = Array.from("ąčęėįšųūž");
@@ -12,7 +13,7 @@ const row2 = Array.from("ertyuiop");
 const row3 = Array.from("asdfghjkl");
 const row4 = Array.from("zcvbnm");
 
-export default function Keyboard({ lettersDisabled }: Props) {
+export default function Keyboard({ lettersDisabled, isWordFull }: Props) {
   const handleClick = (value: string | undefined) => {
     document.dispatchEvent(new CustomEvent("touchpad", { detail: value }));
   };
@@ -58,13 +59,8 @@ export default function Keyboard({ lettersDisabled }: Props) {
         ))}
       </div>
       <div className="flex shrink justify-center">
-        <Key wide value="enter" onClick={handleClick}>
-          <img
-            src={enterIcon}
-            className="pointer-events-none"
-            style={{ maxHeight: "70%" }}
-            alt="enter"
-          />
+        <Key wide value="enter" onClick={handleClick} isColored={isWordFull}>
+          ENTER
         </Key>
         {row4.map((letter) => (
           <Key

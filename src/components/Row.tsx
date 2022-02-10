@@ -9,6 +9,8 @@ type Props = {
   targetWord: string;
   isActive?: boolean;
   small?: boolean;
+  onActiveWordFull?: () => void;
+  onActiveWordNotFull?: () => void;
 };
 export default function Row({
   onSubmit,
@@ -16,6 +18,8 @@ export default function Row({
   targetWord,
   isActive = false,
   small = false,
+  onActiveWordFull,
+  onActiveWordNotFull,
 }: Props) {
   const [activeWord, setActiveWord] = useState<string>("");
 
@@ -62,6 +66,14 @@ export default function Row({
       document.removeEventListener("touchpad", handleTouchpad as EventListener);
     };
   }, [activeWord, isActive, onSubmit]);
+
+  // Announce when word is full or not full to parent components
+  useEffect(() => {
+    if (!isActive || !onActiveWordFull || !onActiveWordNotFull) return;
+
+    if (activeWord.length === 5) onActiveWordFull();
+    else onActiveWordNotFull();
+  }, [activeWord, isActive, onActiveWordFull, onActiveWordNotFull]);
 
   return (
     <>
