@@ -19,7 +19,14 @@ export function getLettersGotGreen(
 ): string[] {
   if (state.length === 0) return [];
 
-  return [...state[state.length - 1]].filter(
-    (letter, index) => targetWord[index] === letter
-  );
+  let result: string[] = [];
+
+  state.forEach((word) => {
+    result = [
+      ...result,
+      ...[...word].filter((letter, index) => targetWord[index] === letter),
+    ];
+  });
+
+  return result;
 }
