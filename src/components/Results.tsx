@@ -67,7 +67,7 @@ export default function Results({ targetWord, gameNumber, onTimeUp }: Props) {
 
   return (
     <>
-      <h2 className="text-xl font-semibold tracking-widest" my-2>
+      <h2 className="text-xl font-semibold tracking-widest my-2">
         <Logo />{" "}
         <span className="tracking-normal font-normal">
           №{gameNumber} {isWinner ? "pavarei!" : "nepaėjo."}

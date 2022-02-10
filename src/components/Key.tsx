@@ -8,12 +8,12 @@ type Props = {
   children?: ReactNode;
   disabled?: boolean;
   onClick?: (value: string | undefined) => void;
-  isColored?: boolean;
+  isEnterColored?: boolean;
+  isGreen?: boolean;
+  isYellow?: boolean;
 };
 
 const style = [
-  "transition-all",
-  "duration-500",
   "flex",
   "items-center",
   "justify-center",
@@ -36,19 +36,27 @@ export default function Key({
   disabled = false,
   children,
   onClick,
-  isColored = false,
+  isEnterColored = false,
+  isGreen,
+  isYellow,
 }: Props) {
   return (
     <div
       className={classNames(
         style,
-        isColored ? "bg-green text-bright" : "bg-silver text-dark"
+        isEnterColored
+          ? "bg-green text-bright"
+          : isGreen
+          ? "bg-green text-bright"
+          : isYellow
+          ? "bg-yellow text-bright"
+          : "bg-silver text-dark"
       )}
       onClick={() => onClick && onClick(value)}
       style={{
         flex: spacer ? "none" : wide ? 1.8 : 1,
-        visibility: spacer || disabled ? "hidden" : "visible",
-        opacity: disabled ? 0 : 1,
+        visibility: spacer ? "hidden" : "visible",
+        opacity: disabled ? 0.3 : 1,
       }}
     >
       {children}

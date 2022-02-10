@@ -9,10 +9,17 @@ import Results from "./components/Results";
 import Rules from "./components/Rules";
 import { targetWord, gameNumber } from "./gameSetup";
 import { loadState, saveState, isFirstTime } from "./storage";
-import getLettersExhausted from "./utils/getLettersExhausted";
+import {
+  getLettersExhausted,
+  getLettersGotGreen,
+  getLettersGotRight,
+} from "./utils/lettersFilter";
 
 function App() {
   const [lettersExhausted, setLettersExhausted] = useState<string[]>([]);
+  const [lettersGotRight, setLettersGotRight] = useState<string[]>([]);
+  const [lettersGotGreen, setLettersGotGreen] = useState<string[]>([]);
+
   const [guesses, setGuesses] = useState<string[]>(loadState(targetWord));
   const [isWordFull, setIsWordFull] = useState(false);
 
@@ -52,6 +59,8 @@ function App() {
 
   useEffect(() => {
     setLettersExhausted(getLettersExhausted(targetWord, guesses));
+    setLettersGotRight(getLettersGotRight(targetWord, guesses));
+    setLettersGotGreen(getLettersGotGreen(targetWord, guesses));
   }, [guesses]);
 
   // OPEN RESULTS ON GAME OVER
@@ -79,7 +88,12 @@ function App() {
         onActiveWordNotFull={() => setIsWordFull(false)}
       />
 
-      <Keyboard lettersDisabled={lettersExhausted} isWordFull={isWordFull && !gameIsOver} />
+      <Keyboard
+        lettersGotGreen={lettersGotGreen}
+        lettersGotRight={lettersGotRight}
+        lettersDisabled={lettersExhausted}
+        isWordFull={isWordFull && !gameIsOver}
+      />
 
       <Card isOpen={isRulesOpen} onClose={() => setIsRulesOpen(false)}>
         <Rules onClose={() => setIsRulesOpen(false)} />

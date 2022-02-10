@@ -3,6 +3,8 @@ import Key from "./Key";
 import deleteIcon from "../assets/delete.svg";
 
 type Props = {
+  lettersGotGreen: string[];
+  lettersGotRight: string[];
   lettersDisabled: string[];
   isWordFull: boolean;
 };
@@ -12,7 +14,12 @@ const row2 = Array.from("ertyuiop");
 const row3 = Array.from("asdfghjkl");
 const row4 = Array.from("zcvbnm");
 
-export default function Keyboard({ lettersDisabled, isWordFull }: Props) {
+export default function Keyboard({
+  lettersDisabled,
+  isWordFull,
+  lettersGotGreen,
+  lettersGotRight,
+}: Props) {
   const handleClick = (value: string | undefined) => {
     document.dispatchEvent(new CustomEvent("touchpad", { detail: value }));
   };
@@ -26,6 +33,8 @@ export default function Keyboard({ lettersDisabled, isWordFull }: Props) {
             key={letter}
             onClick={handleClick}
             disabled={lettersDisabled.includes(letter)}
+            isGreen={lettersGotGreen.includes(letter)}
+            isYellow={lettersGotRight.includes(letter) && !lettersGotGreen.includes(letter)}
           >
             {letter}
           </Key>
@@ -39,6 +48,8 @@ export default function Keyboard({ lettersDisabled, isWordFull }: Props) {
             key={letter}
             onClick={handleClick}
             disabled={lettersDisabled.includes(letter)}
+            isGreen={lettersGotGreen.includes(letter)}
+            isYellow={lettersGotRight.includes(letter) && !lettersGotGreen.includes(letter)}
           >
             {letter}
           </Key>
@@ -52,13 +63,15 @@ export default function Keyboard({ lettersDisabled, isWordFull }: Props) {
             key={letter}
             onClick={handleClick}
             disabled={lettersDisabled.includes(letter)}
+            isGreen={lettersGotGreen.includes(letter)}
+            isYellow={lettersGotRight.includes(letter) && !lettersGotGreen.includes(letter)}
           >
             {letter}
           </Key>
         ))}
       </div>
       <div className="flex shrink justify-center">
-        <Key wide value="enter" onClick={handleClick} isColored={isWordFull}>
+        <Key wide value="enter" onClick={handleClick} isEnterColored={isWordFull}>
           ENTER
         </Key>
         {row4.map((letter) => (
@@ -67,6 +80,8 @@ export default function Keyboard({ lettersDisabled, isWordFull }: Props) {
             key={letter}
             onClick={handleClick}
             disabled={lettersDisabled.includes(letter)}
+            isGreen={lettersGotGreen.includes(letter)}
+            isYellow={lettersGotRight.includes(letter) && !lettersGotGreen.includes(letter)}
           >
             {letter}
           </Key>
