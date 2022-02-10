@@ -79,7 +79,7 @@ function App() {
         onActiveWordNotFull={() => setIsWordFull(false)}
       />
 
-      <Keyboard lettersDisabled={lettersExhausted} isWordFull={isWordFull} />
+      <Keyboard lettersDisabled={lettersExhausted} isWordFull={isWordFull && !gameIsOver} />
 
       <Card isOpen={isRulesOpen} onClose={() => setIsRulesOpen(false)}>
         <Rules onClose={() => setIsRulesOpen(false)} />
