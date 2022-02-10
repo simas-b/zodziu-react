@@ -49,6 +49,7 @@ function App() {
         targetWord={targetWord}
         onSubmit={handleSubmit}
         guesses={guesses}
+        gameIsOver={gameIsOver}
       />
 
       <Keyboard lettersDisabled={lettersExhausted} />

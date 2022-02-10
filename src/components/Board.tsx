@@ -6,13 +6,17 @@ type Props = {
   targetWord: string;
   onSubmit: (guess: string) => void;
   guesses: string[];
+  gameIsOver: boolean;
 };
 
-export default function Board({ targetWord, onSubmit, guesses }: Props) {
+export default function Board({
+  targetWord,
+  onSubmit,
+  guesses,
+  gameIsOver,
+}: Props) {
   const rows = arrayPadEnd(guesses, undefined, 6);
   const activeRowIndex = guesses.length;
-  const gameIsOver = (guesses.length ===
-    6 || guesses[guesses.length - 1] === targetWord);
 
   return (
     <div className="grid grid-cols-5 gap-1 my-2">
