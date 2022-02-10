@@ -33,9 +33,11 @@ function App() {
     });
   };
 
-  // After each submit
   useEffect(() => {
     setLettersExhausted(getLettersExhausted(targetWord, guesses));
+  }, [guesses]);
+
+  useEffect(() => {
     if (guesses.length === 6 || guesses[guesses.length - 1] === targetWord)
       setIsResultsOpen(true);
   }, [guesses]);
