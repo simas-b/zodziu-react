@@ -34,10 +34,11 @@ export default function BadWordNotice({ isOpen, onClose }: Props) {
       style={{ visibility: isOpen ? "visible" : "hidden" }}
     >
       <div
-        className="flex text-center text-2xl font-semibold bg-red-400 p-4 mx-2 rounded-md"
+        className="flex w-full justify-center text-2xl font-semibold bg-red-400 p-8 mx-2 rounded-md"
         style={{
           transition: isOpen ? "none" : "all 0.7s ease-in",
           opacity: isOpen ? 1 : 0,
+          maxWidth: 450,
         }}
       >
         <span>Žodžio nėra sąraše</span>
