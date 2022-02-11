@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import config from "../config";
 import compareWords from "../utils/compareWords";
 import Square, { Color } from "./Square";
+import matchList from "../matchlist";
 
 type Props = {
   onSubmit?: (activeWord: string) => void;
@@ -11,6 +12,7 @@ type Props = {
   small?: boolean;
   onActiveWordFull?: () => void;
   onActiveWordNotFull?: () => void;
+  onActiveWordCorrect?: () => void;
 };
 export default function Row({
   onSubmit,
@@ -20,6 +22,7 @@ export default function Row({
   small = false,
   onActiveWordFull,
   onActiveWordNotFull,
+  onActiveWordCorrect,
 }: Props) {
   const [activeWord, setActiveWord] = useState<string>("");
 
@@ -35,7 +38,7 @@ export default function Row({
       if (key === "enter") {
         if (activeWord.length !== 5) return;
         onSubmit && onSubmit(activeWord);
-        setActiveWord("");
+        // setActiveWord("");
       }
 
       if (key === "delete" || key === "backspace")
@@ -69,10 +72,18 @@ export default function Row({
 
   // Announce when word is full or not full to parent components
   useEffect(() => {
-    if (!isActive || !onActiveWordFull || !onActiveWordNotFull) return;
+    if (
+      !isActive ||
+      !onActiveWordFull ||
+      !onActiveWordNotFull ||
+      !onActiveWordCorrect
+    )
+      return;
 
-    if (activeWord.length === 5) onActiveWordFull();
-    else onActiveWordNotFull();
+    if (activeWord.length === 5) {
+      if (matchList.includes(activeWord)) onActiveWordCorrect();
+      onActiveWordFull();
+    } else onActiveWordNotFull();
   }, [activeWord, isActive, onActiveWordFull, onActiveWordNotFull]);
 
   return (

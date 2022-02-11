@@ -7773,6 +7773,8 @@ const matchList = [
   "zyzia",
   "zyzlė",
   "zyzti",
+  "liest",
+  "piešt",
 ];
 
 export default matchList;

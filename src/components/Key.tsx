@@ -11,6 +11,7 @@ type Props = {
   isEnterColored?: boolean;
   isGreen?: boolean;
   isYellow?: boolean;
+  isWordCorrect?: boolean;
 };
 
 const style = [
@@ -39,13 +40,16 @@ export default function Key({
   isEnterColored = false,
   isGreen,
   isYellow,
+  isWordCorrect,
 }: Props) {
   return (
     <div
       className={classNames(
         style,
-        isEnterColored
+        isEnterColored && isWordCorrect
           ? "bg-green text-bright"
+          : isEnterColored && !isWordCorrect
+          ? "bg-red-400 text-bright"
           : isGreen
           ? "bg-green text-bright"
           : isYellow

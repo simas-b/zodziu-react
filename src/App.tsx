@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import BadWordNotice from "./components/BadWordNotice";
 import Board from "./components/Board";
 import Card from "./components/Card";
 import Header from "./components/Header";
@@ -8,6 +9,7 @@ import MidnightNotice from "./components/MidnightNotice";
 import Results from "./components/Results";
 import Rules from "./components/Rules";
 import { targetWord, gameNumber } from "./gameSetup";
+import matchList from "./matchlist";
 import { loadState, saveState, isFirstTime } from "./storage";
 import {
   getLettersExhausted,
@@ -22,10 +24,12 @@ function App() {
 
   const [guesses, setGuesses] = useState<string[]>(loadState(targetWord));
   const [isWordFull, setIsWordFull] = useState(false);
+  const [isWordCorrect, setIsWordCorrect] = useState(false);
 
   const [isRulesOpen, setIsRulesOpen] = useState(isFirstTime());
   const [isResultsOpen, setIsResultsOpen] = useState(false);
   const [isMidnightNoticeOpen, setIsMidnightNoticeOpen] = useState(false);
+  const [isBadWordNoticeOpen, setIsBadWordNoticeOpen] = useState(false);
 
   let gameIsOver =
     guesses.length === 6 || guesses[guesses.length - 1] === targetWord;
@@ -35,6 +39,12 @@ function App() {
   const handleSubmit = (guess: string) => {
     if (guess.length !== 5)
       throw new Error("Can't submit guess. Should be 5 letters long");
+
+    if (!matchList.includes(guess)) {
+      setIsBadWordNoticeOpen(true);
+      return;
+    }
+
     setGuesses((guesses) => {
       const newGuesses = [...guesses, guess];
       saveState(targetWord, newGuesses);
@@ -85,7 +95,11 @@ function App() {
         guesses={guesses}
         gameIsOver={gameIsOver}
         onActiveWordFull={() => setIsWordFull(true)}
-        onActiveWordNotFull={() => setIsWordFull(false)}
+        onActiveWordNotFull={() => {
+          setIsWordFull(false);
+          setIsWordCorrect(false);
+        }}
+        onActiveWordCorrect={() => setIsWordCorrect(true)}
       />
 
       <Keyboard
@@ -93,6 +107,7 @@ function App() {
         lettersGotRight={lettersGotRight}
         lettersDisabled={lettersExhausted}
         isWordFull={isWordFull && !gameIsOver}
+        isWordCorrect={isWordFull && !gameIsOver && isWordCorrect}
       />
 
       <Card isOpen={isRulesOpen} onClose={() => setIsRulesOpen(false)}>
@@ -110,6 +125,11 @@ function App() {
       <Card isOpen={isMidnightNoticeOpen}>
         {isMidnightNoticeOpen && <MidnightNotice />}
       </Card>
+
+      <BadWordNotice
+        isOpen={isBadWordNoticeOpen}
+        onClose={() => setIsBadWordNoticeOpen(false)}
+      />
     </Layout>
   );
 }
