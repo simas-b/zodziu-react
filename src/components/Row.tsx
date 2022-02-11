@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import config from "../config";
 import compareWords from "../utils/compareWords";
 import Square, { Color } from "./Square";
-import matchList from "../matchlist";
+import isWordCorrect from "../matchList";
 
 type Props = {
   onSubmit?: (activeWord: string) => void;
@@ -81,7 +81,7 @@ export default function Row({
       return;
 
     if (activeWord.length === 5) {
-      if (matchList.includes(activeWord)) onActiveWordCorrect();
+      if (isWordCorrect(activeWord)) onActiveWordCorrect();
       onActiveWordFull();
     } else onActiveWordNotFull();
   }, [activeWord, isActive, onActiveWordFull, onActiveWordNotFull, onActiveWordCorrect]);

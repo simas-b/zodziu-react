@@ -9,7 +9,7 @@ import MidnightNotice from "./components/MidnightNotice";
 import Results from "./components/Results";
 import Rules from "./components/Rules";
 import { targetWord, gameNumber } from "./gameSetup";
-import matchList from "./matchlist";
+import checkIsWordCorrect from "./matchList";
 import { loadState, saveState, isFirstTime } from "./storage";
 import {
   getLettersExhausted,
@@ -40,7 +40,7 @@ function App() {
     if (guess.length !== 5)
       throw new Error("Can't submit guess. Should be 5 letters long");
 
-    if (!matchList.includes(guess)) {
+    if (!checkIsWordCorrect(guess)) {
       setIsBadWordNoticeOpen(true);
       return;
     }
