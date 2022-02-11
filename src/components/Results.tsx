@@ -16,9 +16,10 @@ type Props = {
   targetWord: string;
   gameNumber: number;
   onTimeUp: () => void;
+  onClose: ()=> void;
 };
 
-export default function Results({ targetWord, gameNumber, onTimeUp }: Props) {
+export default function Results({ targetWord, gameNumber, onTimeUp, onClose }: Props) {
   const endGameState = loadState(targetWord);
   const isWinner = endGameState[endGameState.length - 1] === targetWord;
   const [isResultCopiedToClipboard, setIsResultCopiedToClipboard] =
@@ -116,6 +117,9 @@ export default function Results({ targetWord, gameNumber, onTimeUp }: Props) {
           <Countdown onTimeUp={onTimeUp} />
         </div>
       </div>
+      <h2 onClick={onClose} className="self-center font-semibold tracking-wider">
+        UŽDARYTI 
+      </h2>
     </>
   );
 }

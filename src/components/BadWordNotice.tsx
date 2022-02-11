@@ -40,7 +40,7 @@ export default function BadWordNotice({ isOpen, onClose }: Props) {
           opacity: isOpen ? 1 : 0,
         }}
       >
-        <span>Tokio žodžio nežinau :(</span>
+        <span>Žodžio nėra sąraše</span>
       </div>
     </div>
   );

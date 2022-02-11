@@ -110,12 +110,13 @@ function App() {
         isWordCorrect={isWordFull && !gameIsOver && isWordCorrect}
       />
 
-      <Card isOpen={isRulesOpen} onClose={() => setIsRulesOpen(false)}>
+      <Card isOpen={isRulesOpen}>
         <Rules onClose={() => setIsRulesOpen(false)} />
       </Card>
 
-      <Card isOpen={isResultsOpen} onClose={() => setIsResultsOpen(false)}>
+      <Card isOpen={isResultsOpen}>
         <Results
+          onClose={() => setIsResultsOpen(false)}
           targetWord={targetWord}
           gameNumber={gameNumber}
           onTimeUp={handleTimeUp}
