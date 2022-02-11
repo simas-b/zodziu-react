@@ -15,10 +15,6 @@ export default function Rules({ onClose }: Props) {
         Atspėk žodį! Turi šešis bandymus. Įvesk savo variantą ir spausk Enter.
         Langelių spalvos parodys, ar spėjimas buvo taiklus.
       </p>
-      <p className="text-justify mb-4">
-        Žodžių sąraše yra būdvardžiai, veiksmažodžiai ir daiktavardžiai (
-        <u>tik vardininko linksnis</u>). Sąraše yra apie 8000 žodžių. Jeigu įvestas žodis nėra sąraše, tokio spėjimo žaidimas tiesiog nepriims.
-      </p>
       <div className="grid grid-cols-5 gap-1 mt-2">
         <Square color="white" letter="k" small />
         <Square color="white" letter="i" small />
