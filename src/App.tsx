@@ -114,8 +114,7 @@ function App() {
         <Rules onClose={() => setIsRulesOpen(false)} />
       </Card>
 
-      <Card isOpen={isResultsOpen} onClose={(e:SyntheticEvent | undefined)=>{
-        console.log(e);
+      <Card isOpen={isResultsOpen} onClose={()=>{
         setIsResultsOpen(false)
       }}>
         <Results
