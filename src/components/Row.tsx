@@ -84,7 +84,7 @@ export default function Row({
       if (matchList.includes(activeWord)) onActiveWordCorrect();
       onActiveWordFull();
     } else onActiveWordNotFull();
-  }, [activeWord, isActive, onActiveWordFull, onActiveWordNotFull]);
+  }, [activeWord, isActive, onActiveWordFull, onActiveWordNotFull, onActiveWordCorrect]);
 
   return (
     <>
