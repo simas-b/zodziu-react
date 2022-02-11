@@ -1,11 +1,10 @@
 import classNames from "classnames";
-import React, { ReactNode } from "react";
-import crossIcon from "../assets/cross.svg";
+import React, { ReactNode, SyntheticEvent } from "react";
 
 type Props = {
   isOpen: boolean;
   children: ReactNode;
-  onClose?: () => void;
+  onClose?: (e?: SyntheticEvent) => void;
 };
 
 const styles = {
@@ -21,7 +20,7 @@ const styles = {
     "justify-center",
     "z-20",
     "select-none",
-    "py-4"
+    "py-4",
   ],
 
   card: [
@@ -37,7 +36,6 @@ const styles = {
     "bg-white",
     "z-30",
   ],
-
 };
 
 export default function Card({ isOpen = false, children, onClose }: Props) {
@@ -49,8 +47,9 @@ export default function Card({ isOpen = false, children, onClose }: Props) {
           visibility: isOpen ? "visible" : "hidden",
           overflow: "hidden",
           backgroundColor: "rgb(255,255,255,0.8)",
-          maxHeight: "100%"
+          maxHeight: "100%",
         }}
+        onClick={onClose}
       >
         <div
           className={classNames(
@@ -65,18 +64,15 @@ export default function Card({ isOpen = false, children, onClose }: Props) {
             overflowY: "auto",
           }}
         >
-          {onClose && (
-            <div className="flex justify-end w-full">
-              <div className="cursor-pointer select-none" onClick={onClose}>
-                <img
-                  src={crossIcon}
-                  alt="close"
-                  style={{ width: "2rem", height: "2rem" }}
-                />
-              </div>
-            </div>
-          )}
           {children}
+          {onClose && (
+            <h2
+              onClick={onClose}
+              className="cursor-pointer select-none mt-2 self-center font-semibold tracking-wider"
+            >
+              UŽDARYTI
+            </h2>
+          )}
         </div>
       </div>
     </>

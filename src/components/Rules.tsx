@@ -39,9 +39,7 @@ export default function Rules({ onClose }: Props) {
         <Square color="white" letter="u" small />
       </div>
       <p className="my-2">Atspėjai raidę ir jos vietą žodyje.</p>
-      <h2 onClick={onClose} className="mt-2 self-center font-semibold tracking-wider">
-        UŽDARYTI 
-      </h2>
+
     </div>
   );
 }

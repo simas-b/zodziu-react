@@ -16,10 +16,9 @@ type Props = {
   targetWord: string;
   gameNumber: number;
   onTimeUp: () => void;
-  onClose: ()=> void;
 };
 
-export default function Results({ targetWord, gameNumber, onTimeUp, onClose }: Props) {
+export default function Results({ targetWord, gameNumber, onTimeUp }: Props) {
   const endGameState = loadState(targetWord);
   const isWinner = endGameState[endGameState.length - 1] === targetWord;
   const [isResultCopiedToClipboard, setIsResultCopiedToClipboard] =
@@ -85,7 +84,10 @@ export default function Results({ targetWord, gameNumber, onTimeUp, onClose }: P
         !isSharingBroken && (
           <div
             className="flex my-4 py-4 w-3/4 justify-center items-center border-yellow border-y-2 cursor-pointer"
-            onClick={handleSocialClick}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleSocialClick();
+            }}
           >
             <div className="flex-1 flex justify-center items-center">
               <SocialStatus icons={icons} />
@@ -117,9 +119,6 @@ export default function Results({ targetWord, gameNumber, onTimeUp, onClose }: P
           <Countdown onTimeUp={onTimeUp} />
         </div>
       </div>
-      <h2 onClick={onClose} className="self-center font-semibold tracking-wider">
-        UŽDARYTI 
-      </h2>
     </>
   );
 }

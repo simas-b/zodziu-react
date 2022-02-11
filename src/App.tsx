@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { SyntheticEvent, useEffect, useState } from "react";
 import BadWordNotice from "./components/BadWordNotice";
 import Board from "./components/Board";
 import Card from "./components/Card";
@@ -110,13 +110,15 @@ function App() {
         isWordCorrect={isWordFull && !gameIsOver && isWordCorrect}
       />
 
-      <Card isOpen={isRulesOpen}>
+      <Card isOpen={isRulesOpen} onClose={()=>setIsRulesOpen(false)}>
         <Rules onClose={() => setIsRulesOpen(false)} />
       </Card>
 
-      <Card isOpen={isResultsOpen}>
+      <Card isOpen={isResultsOpen} onClose={(e:SyntheticEvent | undefined)=>{
+        console.log(e);
+        setIsResultsOpen(false)
+      }}>
         <Results
-          onClose={() => setIsResultsOpen(false)}
           targetWord={targetWord}
           gameNumber={gameNumber}
           onTimeUp={handleTimeUp}
