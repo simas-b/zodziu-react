@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import BadWordNotice from "./components/BadWordNotice";
 import Board from "./components/Board";
 import Card from "./components/Card";
