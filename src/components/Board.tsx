@@ -25,14 +25,14 @@ export default function Board({
   const activeRowIndex = guesses.length;
 
   const [freeHeight, setFreeHeight] = useState(
-    Math.trunc(window.innerHeight - 340)
+    Math.trunc(window.innerHeight - 272)
   );
   // Header and keyboard take up 250 px
 
   useEffect(() => {
     const handleResize = () => {
       console.log("handlin");
-      setFreeHeight(Math.trunc(window.innerHeight - 340));
+      setFreeHeight(Math.trunc(window.innerHeight - 272));
     };
 
     window.addEventListener("resize", handleResize);
@@ -41,7 +41,7 @@ export default function Board({
     };
   }, []);
   let boardHeight = freeHeight;
-  boardHeight = boardHeight < 394 ? boardHeight : 394;
+  boardHeight = boardHeight < 360 ? boardHeight : 360;
   const boardWidth = Math.trunc(boardHeight * 0.83);
   const squareSize = Math.trunc(boardHeight / 6.5);
 
