@@ -31,7 +31,6 @@ export default function Board({
 
   useEffect(() => {
     const handleResize = () => {
-      console.log("handlin");
       setFreeHeight(Math.trunc(window.innerHeight - 272));
     };
 
