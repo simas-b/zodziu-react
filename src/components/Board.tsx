@@ -24,10 +24,11 @@ export default function Board({
   const rows = arrayPadEnd(guesses, undefined, 6);
   const activeRowIndex = guesses.length;
 
+  // Header and keyboard take up 250 px
+
   const [freeHeight, setFreeHeight] = useState(
     Math.trunc(window.innerHeight - 272)
   );
-  // Header and keyboard take up 250 px
 
   useEffect(() => {
     const handleResize = () => {

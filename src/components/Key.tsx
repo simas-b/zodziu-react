@@ -61,7 +61,6 @@ export default function Key({
         flex: spacer ? "none" : wide ? 1.8 : 1,
         visibility: spacer ? "hidden" : "visible",
         opacity: isGreen ? 0.9 : isYellow ? 0.8 : disabled ? 0.3 : 1,
-        pointerEvents: disabled ? "none" : "all",
       }}
     >
       {children}
