@@ -76,7 +76,7 @@ export default function Results({ targetWord, gameNumber, onTimeUp }: Props) {
 
       {/* ANSWER */}
       <div className="grid grid-cols-5 gap-1 my-4 pt-1">
-        <Row guess={targetWord} targetWord={targetWord} small />
+        <Row guess={targetWord} targetWord={targetWord} squareSize={32} />
       </div>
 
       {/* SOCIAL */}

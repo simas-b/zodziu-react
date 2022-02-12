@@ -8,6 +8,7 @@ type Props = {
   small?: boolean;
   letter?: string;
   active?: boolean;
+  size: number;
 };
 
 const colorClass = {
@@ -25,26 +26,23 @@ const style = [
   "select-none",
   "border-2",
   "shadow-md",
+  "overflow-hidden"
 ];
 
 export default function Square({
   color = "white",
   letter,
-  small = false,
   active = false,
+  size,
 }: Props) {
-  const sizeClass = small
-    ? "h-8 w-8 sm:h-10 sm:w-10 text-xl sm:text-2xl"
-    : "h-12 w-12 sm:h-14 sm:w-14 text-2xl sm:text-4xl";
   return (
     <div
       className={classNames(
         style,
-        sizeClass,
         colorClass[color],
         active ? "border-dark" : ""
       )}
-      style={{transition: "background-color 0.5s ease"}}
+      style={{ transition: "background-color 0.5s ease", width: size, height: size, fontSize: Math.trunc(size*0.8)  }}
     >
       {letter}
     </div>

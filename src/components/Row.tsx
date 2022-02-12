@@ -13,6 +13,7 @@ type Props = {
   onActiveWordFull?: () => void;
   onActiveWordNotFull?: () => void;
   onActiveWordCorrect?: () => void;
+  squareSize: number;
 };
 export default function Row({
   onSubmit,
@@ -23,6 +24,7 @@ export default function Row({
   onActiveWordFull,
   onActiveWordNotFull,
   onActiveWordCorrect,
+  squareSize,
 }: Props) {
   const [activeWord, setActiveWord] = useState<string>("");
 
@@ -84,7 +86,13 @@ export default function Row({
       if (isWordCorrect(activeWord)) onActiveWordCorrect();
       onActiveWordFull();
     } else onActiveWordNotFull();
-  }, [activeWord, isActive, onActiveWordFull, onActiveWordNotFull, onActiveWordCorrect]);
+  }, [
+    activeWord,
+    isActive,
+    onActiveWordFull,
+    onActiveWordNotFull,
+    onActiveWordCorrect,
+  ]);
 
   return (
     <>
@@ -94,7 +102,7 @@ export default function Row({
           letter={word?.[index]}
           key={index}
           active={isActive && !!activeWord[index]}
-          small={small}
+          size={squareSize}
         />
       ))}
     </>

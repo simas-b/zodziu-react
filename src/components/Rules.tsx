@@ -16,27 +16,27 @@ export default function Rules({ onClose }: Props) {
         Langelių spalvos parodys, ar spėjimas buvo taiklus.
       </p>
       <div className="grid grid-cols-5 gap-1 mt-2">
-        <Square color="white" letter="k" small />
-        <Square color="white" letter="i" small />
-        <Square color="gray" letter="r" small />
-        <Square color="white" letter="a" small />
-        <Square color="white" letter="s" small />
+        <Square color="white" letter="k" size={32} />
+        <Square color="white" letter="i" size={32} />
+        <Square color="gray" letter="r" size={32} />
+        <Square color="white" letter="a" size={32} />
+        <Square color="white" letter="s" size={32} />
       </div>
       <p className="my-2">Šios raidės žodyje nėra.</p>
       <div className="grid grid-cols-5 gap-1 mt-2">
-        <Square color="white" letter="t" small />
-        <Square color="white" letter="o" small />
-        <Square color="white" letter="l" small />
-        <Square color="white" letter="y" small />
-        <Square color="yellow" letter="n" small />
+        <Square color="white" letter="t" size={32} />
+        <Square color="white" letter="o" size={32} />
+        <Square color="white" letter="l" size={32} />
+        <Square color="white" letter="y" size={32} />
+        <Square color="yellow" letter="n" size={32} />
       </div>
       <p className="my-2">Raidė yra žodyje, tačiau kitoje vietoje.</p>
       <div className="grid grid-cols-5 gap-1 mt-2">
-        <Square color="white" letter="s" small />
-        <Square color="green" letter="a" small />
-        <Square color="white" letter="l" small />
-        <Square color="white" letter="d" small />
-        <Square color="white" letter="u" small />
+        <Square color="white" letter="s" size={32} />
+        <Square color="green" letter="a" size={32} />
+        <Square color="white" letter="l" size={32} />
+        <Square color="white" letter="d" size={32} />
+        <Square color="white" letter="u" size={32} />
       </div>
       <p className="my-2">Atspėjai raidę ir jos vietą žodyje.</p>
 

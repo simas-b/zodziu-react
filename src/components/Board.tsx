@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Row from "./Row";
 import arrayPadEnd from "../utils/arrayPadEnd";
 
@@ -24,10 +24,35 @@ export default function Board({
   const rows = arrayPadEnd(guesses, undefined, 6);
   const activeRowIndex = guesses.length;
 
+  const [freeHeight, setFreeHeight] = useState(
+    Math.trunc(window.innerHeight - 340)
+  );
+  // Header and keyboard take up 250 px
+
+  useEffect(() => {
+    const handleResize = () => {
+      console.log("handlin");
+      setFreeHeight(Math.trunc(window.innerHeight - 340));
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  let boardHeight = freeHeight;
+  boardHeight = boardHeight < 394 ? boardHeight : 394;
+  const boardWidth = Math.trunc(boardHeight * 0.83);
+  const squareSize = Math.trunc(boardHeight / 6.5);
+
   return (
-    <div className="grid grid-cols-5 gap-1 my-2">
+    <div
+      className="grid grid-cols-5 gap-1"
+      style={{ width: boardWidth, height: boardHeight }}
+    >
       {rows.map((_, index) => (
         <Row
+          squareSize={squareSize}
           onSubmit={onSubmit}
           targetWord={targetWord}
           guess={guesses[index]}
