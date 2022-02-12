@@ -82,6 +82,15 @@ function App() {
     }
   }, [guesses, gameIsOver, isMidnightNoticeOpen]);
 
+  // Handle generic click on screen
+
+  const handleScreenClick = () => {
+    if(gameIsOver) {
+      setIsResultsOpen(true);
+    }
+  }
+  
+
   return (
     <Layout>
       <Header
@@ -100,6 +109,7 @@ function App() {
           setIsWordCorrect(false);
         }}
         onActiveWordCorrect={() => setIsWordCorrect(true)}
+        onClick={handleScreenClick}
       />
 
       <Keyboard
@@ -108,6 +118,7 @@ function App() {
         lettersDisabled={lettersExhausted}
         isWordFull={isWordFull && !gameIsOver}
         isWordCorrect={isWordFull && !gameIsOver && isWordCorrect}
+        onClick={handleScreenClick}
       />
 
       <Card isOpen={isRulesOpen} onClose={()=>setIsRulesOpen(false)}>

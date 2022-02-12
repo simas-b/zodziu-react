@@ -10,6 +10,7 @@ type Props = {
   onActiveWordFull: () => void;
   onActiveWordNotFull: () => void;
   onActiveWordCorrect: () => void;
+  onClick: ()=>void;
 };
 
 export default function Board({
@@ -20,6 +21,7 @@ export default function Board({
   onActiveWordFull,
   onActiveWordNotFull,
   onActiveWordCorrect,
+  onClick,
 }: Props) {
   const rows = arrayPadEnd(guesses, undefined, 6);
   const activeRowIndex = guesses.length;
@@ -49,6 +51,7 @@ export default function Board({
     <div
       className="grid grid-cols-5 gap-1"
       style={{ width: boardWidth, height: boardHeight }}
+      onClick={onClick}
     >
       {rows.map((_, index) => (
         <Row

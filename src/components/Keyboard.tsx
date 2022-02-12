@@ -8,6 +8,7 @@ type Props = {
   lettersDisabled: string[];
   isWordFull: boolean;
   isWordCorrect: boolean;
+  onClick: ()=>void;
 };
 
 const row1 = Array.from("ąčęėįšųūž");
@@ -21,13 +22,14 @@ export default function Keyboard({
   lettersGotGreen,
   lettersGotRight,
   isWordCorrect,
+  onClick
 }: Props) {
   const handleClick = (value: string | undefined) => {
     document.dispatchEvent(new CustomEvent("touchpad", { detail: value }));
   };
 
   return (
-    <div className="flex w-full flex-col" style={{ maxWidth: 450 }}>
+    <div className="flex w-full flex-col" style={{ maxWidth: 450 }} onClick={onClick}>
       <div className="flex shrink justify-center">
         {row1.map((letter) => (
           <Key
