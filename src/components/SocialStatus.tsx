@@ -11,7 +11,6 @@ const styles = {
     "shadow-lg",
     "shadow-silver",
     "select-none",
-    "cursor-pointer",
     "leading-5",
     "border",
     "border-gray",

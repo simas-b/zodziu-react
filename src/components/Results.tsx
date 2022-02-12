@@ -81,35 +81,39 @@ export default function Results({ targetWord, gameNumber, onTimeUp }: Props) {
 
       {/* SOCIAL */}
       {(isNavigatorShareAvailable || isNavigatorClipboardAvailable) &&
-        !isSharingBroken && (
-          <div
-            className="flex my-4 py-4 w-3/4 justify-center items-center border-yellow border-y-2 cursor-pointer"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleSocialClick();
-            }}
-          >
-            <div className="flex-1 flex justify-center items-center">
-              <SocialStatus icons={icons} />
-            </div>
-
-            <div className="flex-1 flex flex-col justify-center items-start pl-4">
-              <p id="share-text">
-                {isResultCopiedToClipboard
-                  ? "Nukopijuota!"
-                  : "Dalinkis rezultatu"}
-              </p>
-              <p className="py-1"></p>
-              <img
-                src={arrowIcon}
-                alt=""
-                width="40"
-                height="40"
-                className="select-none"
-              />
-            </div>
+      !isSharingBroken ? (
+        <div
+          className="flex my-4 py-4 w-3/4 justify-center items-center border-yellow border-y-2 cursor-pointer"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleSocialClick();
+          }}
+        >
+          <div className="flex-1 flex justify-center items-center cursor-pointer">
+            <SocialStatus icons={icons} />
           </div>
-        )}
+
+          <div className="flex-1 flex flex-col justify-center items-start pl-4">
+            <p id="share-text">
+              {isResultCopiedToClipboard
+                ? "Nukopijuota!"
+                : "Dalinkis rezultatu"}
+            </p>
+            <p className="py-1"></p>
+            <img
+              src={arrowIcon}
+              alt=""
+              width="40"
+              height="40"
+              className="select-none"
+            />
+          </div>
+        </div>
+      ) : (
+        <div className="flex-1 flex justify-center items-center py-4 mb-2">
+          <SocialStatus icons={icons} />
+        </div>
+      )}
 
       {/* COUNTDOWN */}
 
