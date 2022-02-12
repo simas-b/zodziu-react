@@ -42,7 +42,7 @@ export default function Square({
         colorClass[color],
         active ? "border-dark" : ""
       )}
-      style={{ transition: "background-color 0.5s ease", width: size, height: size, fontSize: Math.trunc(size*0.8)  }}
+      style={{ transition: "background-color 0.5s ease", width: size, height: size, fontSize: Math.trunc(size*0.7), paddingTop: Math.trunc(size/15)  }}
     >
       {letter}
     </div>
