@@ -2066,6 +2066,7 @@ const matchListPrefix = [
   "žys",
   "zyz",
   "kūs",
+  "pis",
 ];
 
 const matchListSuffix = [
