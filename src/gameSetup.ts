@@ -1,10 +1,9 @@
 import wordlist from "./wordlist";
+import moment from 'moment';
 
 const getTodaysGameNumber = () => {
-  const gameStart = new Date(2022, 1, 8, 0, 0, 0, 0);
-  const distance = new Date().getTime() - gameStart.getTime();
-
-  const daysPassed = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const gameStart = moment('2022-01-08');
+  const daysPassed = gameStart.diff(moment(), 'days');
 
   return daysPassed % wordlist.length;
 };
