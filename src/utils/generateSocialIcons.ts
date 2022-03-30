@@ -23,7 +23,7 @@ function convertColorToIcon(color: Color): string {
     case "gray":
       return "⬜";
     case "green":
-      return "🟩";
+      return "🟦";
     case "yellow":
       return "🟨";
     default:
